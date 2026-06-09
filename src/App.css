@@ -1,0 +1,10 @@
+.App {
+  /* Adjust this number based on how tall your navbar is (e.g., 60px, 80px) */
+  padding-top: 65px; 
+  
+  /* These keep your flexbox structure from index.css working beautifully */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+

@@ -1,0 +1,110 @@
+:root {
+  /* High-contrast, bold black and white palette */
+  --text: #000000;
+  --text-h: #000000;
+  --bg: #ffffff;
+  --code-bg: #f5f5f5;
+  
+  /* Removed colors/borders; fallback to transparent/none where needed */
+  --border: transparent;
+  --accent: #000000;
+  --accent-bg: transparent;
+  --accent-border: transparent;
+  --social-bg: transparent;
+  --shadow: none;
+
+  /* Font typography update */
+  --sans: 'Helvetica Neue', Arial, sans-serif;
+  --heading: 'Helvetica Neue', Arial, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+
+  font: 18px/145% var(--sans);
+  letter-spacing: 0.18px;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+}
+
+/* 1. Added HTML & BODY Reset here to force full-width across the viewport */
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden; 
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-color: var(--bg); /* Keeps your white portfolio background */
+}
+
+/* Ensure padding doesn't accidentally cause horizontal scrolling */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+#root {
+  width: 100%;       /* Changed from 1126px to 100% */
+  margin: 0;         /* Removed the auto centering here */
+  text-align: center;
+  border-inline: none; 
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1,
+h2 {
+  font-family: var(--heading);
+  font-weight: 800; 
+  color: var(--text-h);
+}
+
+h1 {
+  font-size: 56px;
+  letter-spacing: -1.68px;
+  margin: 32px 0;
+  @media (max-width: 1024px) {
+    font-size: 36px;
+    margin: 20px 0;
+  }
+}
+
+h2 {
+  font-size: 24px;
+  line-height: 118%;
+  letter-spacing: -0.24px;
+  margin: 0 0 8px;
+  @media (max-width: 1024px) {
+    font-size: 20px;
+  }
+}
+
+p {
+  margin: 0;
+  font-weight: 500; 
+}
+
+code,
+.counter {
+  font-family: var(--mono);
+  display: inline-flex;
+  border-radius: 0px; 
+  color: var(--text-h);
+}
+
+code {
+  font-size: 15px;
+  line-height: 135%;
+  padding: 4px 8px;
+  background: var(--code-bg);
+}

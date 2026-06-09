@@ -1,0 +1,105 @@
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slider {
+    position: fixed;
+    top: 0;          /* Reset top position */
+    left: 0;         /* Reset left position */
+    width: 100vw;
+    height: 100svh;
+    overflow: hidden;/* Add a dark background so white text is visible */    /* Bring it to the front layer */
+}
+
+.slide {
+    position: absolute;
+    width: 45vw;
+    height: 100svh;
+    overflow: hidden;
+}
+
+.slide-title{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color: white;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: 500;
+    line-height: 1;
+    background-color: black;
+    padding: 0.2rem 0.4rem;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.thumbnail-wheel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100svh;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.thumbnail-item {
+    position: absolute;
+    width: 35px;
+    height: 50px;
+    overflow: hidden;
+}
+
+/* --- FIXED TOP LEFT BACK CONTAINER --- */
+.back {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 65px; /* Matches navbar height for layout continuity */
+  display: flex;
+  align-items: center;
+  padding-left: 40px; /* Matches .navbar .leftSide padding */
+  z-index: 1002; /* Sits completely on top of everything */
+}
+
+/* --- BRACKET LINK STYLING WITH WHITE THEME --- */
+.back a {
+  color: #ffffff; /* Forces link text to be white */
+  text-decoration: none;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 15px; 
+  font-weight: 700; 
+  position: relative;
+  display: inline-block;
+  transition: opacity 0.2s ease;
+  background-color: black;
+  padding: 0.2rem 1rem;
+}
+
+/* Absolute positioning tracking variables for bracket bounds */
+.back a::before, 
+.back a::after {
+  position: absolute;
+  align-items: center;
+  opacity: 0;
+  color: #ffffff; /* Forces brackets to be white */
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease;
+}
+
+.back a::before { content: "["; left: -12px; transform: translateX(-10px); }
+.back a::after { content: "]"; right: -12px; transform: translateX(10px); }
+
+/* --- TRIGGER ACTION HOVER STATES --- */
+.back a:hover {
+  opacity: 0.8;
+}
+
+.back a:hover::before, 
+.back a:hover::after {
+  opacity: 1;
+  transform: translateX(0);
+}

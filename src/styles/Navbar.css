@@ -1,0 +1,128 @@
+.navbar {
+  width: 100%;
+  height: 65px; 
+  display: flex;
+  flex-direction: row;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  
+  /* Apple Glassmorphism */   
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.navbar.menu-closed {
+  border-bottom-color: transparent;
+}
+
+.navbar .leftSide {
+  flex: 30%; /* Gives the left side a reliable base footprint */
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 40px; 
+}
+
+.navbar .center {
+  flex: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Premium deceleration timing curve for the sliding smash */
+  transition: transform 0.45s cubic-bezier(0.25, 1, 0.3, 1), opacity 0.3s ease 0.15s;
+}
+
+.navbar .rightSide {
+  flex: 20%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; 
+  padding-right: 30px;
+}
+
+.navbar .contact-wrapper {
+  display: inline-flex;
+  align-items: center;
+  /* Stays completely still in position, only the visibility fades with a tiny pause */
+  transition: opacity 0.3s ease 0.15s;
+}
+
+/* --- THE RIGHT-SIDE COMPRESSION ANIMATION --- */
+
+/* --- THE RIGHT-SIDE SLIDE-OUT & SLIDE-IN ANIMATION --- */
+
+/* State: OPEN (Fully Visible Layout, pulled back to normal position) */
+.navbar .center#open {
+  transform: translateX(0); /* Returns perfectly to the center line */
+  opacity: 1;
+  pointer-events: auto;
+  /* Smoothly pulls back in from the right when opened */
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.3, 1), opacity 0.4s ease;
+}
+
+/* State: CLOSED (Sandwiching and disappearing into the right side) */
+.navbar .center#close {
+  transform: translateX(30%); /* Pushes 30% to the right side */
+  opacity: 0;
+  pointer-events: none;
+  /* Smoothly glides away to the right when closed */
+  transition: transform 0.45s cubic-bezier(0.25, 1, 0.3, 1), opacity 0.3s ease;
+}
+
+/* --- ANIMATION KEYFRAMES --- */
+
+
+/* --- HOVER BRACKET SANDWICHES --- */
+
+.navbar a {
+  color: var(--text, #000000); 
+  text-decoration: none;
+  margin: 0 20px;
+  font-size: 15px; 
+  font-weight: 700; 
+  position: relative;
+  display: inline-block;
+  transition: opacity 0.2s ease;
+}
+
+.navbar a::before, .navbar a::after {
+  position: absolute;
+  align-items: center;
+  opacity: 0;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease;
+}
+.navbar a::before { content: "["; left: -12px; transform: translateX(-10px); }
+.navbar a::after { content: "]"; right: -12px; transform: translateX(10px); }
+
+.navbar a:hover::before, .navbar a:hover::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* --- FIXED TOGGLE CONTROLLER --- */
+.navbar .toggle-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 15px; 
+  font-weight: 700;
+  color: var(--text, #000000); 
+  padding: 0;
+  margin-left: 25px;
+  white-space: nowrap; 
+  z-index: 1001;
+  transition: opacity 0.2s ease;
+}
+.navbar .toggle-btn:hover { opacity: 0.6; }
+
+.navbar.hidden-nav {
+  display: none !important;
+  pointer-events: none;
+}
