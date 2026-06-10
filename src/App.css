@@ -1,10 +1,30 @@
-.App {
-  /* Adjust this number based on how tall your navbar is (e.g., 60px, 80px) */
-  padding-top: 65px; 
-  
-  /* These keep your flexbox structure from index.css working beautifully */
+
+
+/* Container that covers the entire viewport */
+.transition-overlay {
+  position: fixed;
+  color: black;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  z-index: 9999; /* Ensures it stays on top of all content */
+  pointer-events: none; /* Allows clicking "through" once blocks vanish */
 }
 
+.liquid-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 110vh; /* Extra height handles the fluid "droop" bounce stretching past the bottom */
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.liquid-overlay path {
+  width: 100%;
+  height: 100%;
+}

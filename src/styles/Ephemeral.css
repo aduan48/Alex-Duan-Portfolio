@@ -1,105 +1,289 @@
+body.ephemeral-page {
+  --bg: #000;
+  background: #000;
+  overflow: hidden !important; /* Lock everything down globally */
+  height: 100vh;
+}
+
+body.ephemeral-page.ephemeral-can-scroll {
+  overflow-y: auto !important; /* Allow track generation */
+  height: auto; 
+}
+
+body.ephemeral-page #root {
+  background: #000;
+}
+
+.ephemeral-body {
+  background: #000;
+  min-height: 100vh;
+  position: relative;
+}
+
 img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
-.slider {
-    position: fixed;
-    top: 0;          /* Reset top position */
-    left: 0;         /* Reset left position */
-    width: 100vw;
-    height: 100svh;
-    overflow: hidden;/* Add a dark background so white text is visible */    /* Bring it to the front layer */
-}
-
-.slide {
-    position: absolute;
-    width: 45vw;
-    height: 100svh;
-    overflow: hidden;
-}
-
-.slide-title{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    color: white;
-    text-align: center;
-    text-transform: uppercase;
-    font-size: 0.8rem;
-    font-weight: 500;
-    line-height: 1;
-    background-color: black;
-    padding: 0.2rem 0.4rem;
-    pointer-events: none;
-    z-index: 2;
-}
-
-.thumbnail-wheel {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100svh;
-    pointer-events: none;
-    z-index: 1;
-}
-
-.thumbnail-item {
-    position: absolute;
-    width: 35px;
-    height: 50px;
-    overflow: hidden;
-}
-
-/* --- FIXED TOP LEFT BACK CONTAINER --- */
-.back {
+nav {
   position: fixed;
-  bottom: 0;
+  top: 0;
   left: 0;
-  height: 65px; /* Matches navbar height for layout continuity */
+  width: 100%;
+  height: 70px;
+  padding: 0.75em 2em;
   display: flex;
-  align-items: center;
-  padding-left: 40px; /* Matches .navbar .leftSide padding */
-  z-index: 1002; /* Sits completely on top of everything */
+  z-index: 2;
+
+  /* --- APPLE GLASSMORPHISM COMPONENT --- */
+  background: rgba(0, 0, 0, 0.15);            /* Transparent dark tint to complement your pure black backdrop */
+  backdrop-filter: blur(20px);                /* The actual frosted glass blur engine */
+  -webkit-backdrop-filter: blur(20px);        /* Safari support */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* Crisp premium top-edge highlight */
 }
 
-/* --- BRACKET LINK STYLING WITH WHITE THEME --- */
-.back a {
-  color: #ffffff; /* Forces link text to be white */
+nav .nav-item {
+  flex: 1;
+}
+
+nav .nav-item p {
+  color: #ffffff;
   text-decoration: none;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 15px; 
-  font-weight: 700; 
+  margin: 0 20px;
+  font-size: 15px;
+  font-weight: 700;
   position: relative;
   display: inline-block;
+  cursor: pointer;
+  text-transform: none;
+  padding: 1em 0.25em;
   transition: opacity 0.2s ease;
-  background-color: black;
-  padding: 0.2rem 1rem;
 }
 
-/* Absolute positioning tracking variables for bracket bounds */
-.back a::before, 
-.back a::after {
+nav .nav-item p::before,
+nav .nav-item p::after {
   position: absolute;
   align-items: center;
   opacity: 0;
-  color: #ffffff; /* Forces brackets to be white */
-  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+    opacity 0.3s ease;
 }
 
-.back a::before { content: "["; left: -12px; transform: translateX(-10px); }
-.back a::after { content: "]"; right: -12px; transform: translateX(10px); }
-
-/* --- TRIGGER ACTION HOVER STATES --- */
-.back a:hover {
-  opacity: 0.8;
+nav .nav-item p::before {
+  content: "[";
+  left: -12px;
+  transform: translateX(-10px);
 }
 
-.back a:hover::before, 
-.back a:hover::after {
+nav .nav-item p::after {
+  content: "]";
+  right: -12px;
+  transform: translateX(10px);
+}
+
+nav .nav-item p:hover::before,
+nav .nav-item p:hover::after {
   opacity: 1;
   transform: translateX(0);
+}
+
+.img-previews {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30%;
+  opacity: 0;
+}
+
+.img-previews img {
+  width: 600px;
+  height: 700px;
+  padding: 1em 0;
+  margin-bottom: 4em;
+
+}
+
+body.ephemeral-page.ephemeral-can-scroll .img-previews {
+  visibility: visible;
+  position: relative; /* Switch from absolute to relative to populate native document height for layout-2 */
+
+}
+
+
+
+.gallery-container {
+  width: 100%;
+  padding-top: 4em;
+  background: #000;
+}
+
+.gallery.layout-1-gallery {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform: translateX(0%);
+}
+
+.gallery.layout-1-gallery .img {
+  position: absolute;
+  width: 100px;
+  aspect-ratio: 8.5 / 11;
+}
+
+.gallery.layout-2-gallery {
+  padding-top: 0.5em;
+  position: fixed;
+  top: 50%;
+  left: 10%;
+  transform: translateX(0%);
+}
+
+.gallery.layout-2-gallery .img {
+  width: 75px;
+  height: 100px;
+  margin-bottom: 1em;
+}
+
+
+.gallery.layout-3-gallery {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform: translateX(0%);
+  margin-right: 10%;
+}
+
+.gallery.layout-3-gallery .img {
+  position: absolute;
+  right: 4em;
+  width: 300px;
+  height: 400px;
+}
+
+.gallery.layout-1-gallery #img1,
+.gallery.layout-1-gallery #img2,
+.gallery.layout-1-gallery #img3,
+.gallery.layout-1-gallery #img4 {
+  top: 0%;
+}
+
+.gallery.layout-1-gallery #img5,
+.gallery.layout-1-gallery #img6,
+.gallery.layout-1-gallery #img7,
+.gallery.layout-1-gallery #img8 {
+  top: 22.5%;
+}
+
+.gallery.layout-1-gallery #img9,
+.gallery.layout-1-gallery #img10 {
+  top: 45%;
+}
+
+.gallery.layout-1-gallery #img11,
+.gallery.layout-1-gallery #img12 {
+  top: 67.5%;
+}
+
+.gallery.layout-1-gallery #img1,
+.gallery.layout-1-gallery #img5,
+.gallery.layout-1-gallery #img11, .gallery.layout-1-gallery #img9
+{
+  left: 2em;
+}
+
+.gallery.layout-1-gallery #img2 {
+  left: 15%;
+}
+
+.gallery.layout-1-gallery #img3 {
+  left: 45%;
+}
+
+.gallery.layout-1-gallery #img4,
+.gallery.layout-1-gallery #img10,
+.gallery.layout-1-gallery #img12 {
+  left: 65%;
+}
+
+.gallery.layout-1-gallery #img6 {
+  left: 25%;
+}
+
+.gallery.layout-1-gallery #img7 {
+  right: 15%;
+}
+
+.gallery.layout-1-gallery #img8 {
+  right: 2em;
+}
+
+.minimap {
+  position: fixed;
+  top: 51%;
+  left: 12.5%;
+  transform: translateX(-50%);
+  width: 140px;
+  height: 90px;
+  border: 1px solid #fff;
+  border-radius: 2px;
+  z-index: 2;
+  visibility: hidden;
+  opacity: 0;
+}
+
+/* lenis */
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+
+.layout-3-text {
+  position: fixed;
+  left: 4em;
+  
+  /* --- CHANGED: Anchor from 50% top instead of 20% --- */
+  top: 55%; 
+  transform: translateY(-50%); /* This perfectly centers the new larger height block */
+  
+  /* --- SAFETIES: Prevent clipping on smaller laptop windows --- */
+  max-height: 70vh;
+  overflow-y: auto;
+  
+  width: 60%;
+  color: #fff;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  text-align: left;
+  z-index: 3;
+}
+
+.layout-3-text h1 {
+  /* REMOVED: top: 100px; (This does nothing on a standard block element and causes tracking bugs) */
+  font-size: 56px;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  margin-bottom: 0.35em;
+  color: #fff;
+}
+
+.layout-3-text p {
+  font-size: 16px;
+  line-height: 1.4;
+  color: #d6d4d4;
+  padding-bottom: 1.2em; /* Adds clean editorial space between your paragraphs */
 }

@@ -1,10 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import transition from '../transition';
+import '../styles/Work.css'
 
 function Work() {
   return (
-    <div style={{ padding: '20px' }}>
+    <div className='Work'>
       <h1>PROJECTS</h1>
       <p>Hello world</p>
       
