@@ -5,7 +5,8 @@ import '../styles/Navbar.css';
 function Navbar() {
   const [openLinks, setOpenLinks] = useState(true);
   const location = useLocation();
-  const isEphemeralPage = location.pathname === '/work/ephemeral';
+  const isEphemeralPage = location.pathname === '/work/ephemeral' || location.pathname === '/work/colby';
+
 
   const toggleNavbar = () => {
     setOpenLinks(!openLinks);

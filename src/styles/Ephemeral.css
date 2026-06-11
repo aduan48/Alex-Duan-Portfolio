@@ -1,12 +1,13 @@
+/* --- GLOBAL BODY LOCKS FOR EPHEMERAL --- */
 body.ephemeral-page {
   --bg: #000;
-  background: #000;
-  overflow: hidden !important; /* Lock everything down globally */
+  background: #000 !important;
+  overflow: hidden !important; 
   height: 100vh;
 }
 
 body.ephemeral-page.ephemeral-can-scroll {
-  overflow-y: auto !important; /* Allow track generation */
+  overflow-y: auto !important; 
   height: auto; 
 }
 
@@ -14,19 +15,21 @@ body.ephemeral-page #root {
   background: #000;
 }
 
+/* --- WRAPPER & MEDIA SCALERS --- */
 .ephemeral-body {
   background: #000;
   min-height: 100vh;
   position: relative;
 }
 
-img {
+.ephemeral-body img {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
 
-nav {
+/* --- CINEMATIC DARK NAVIGATION --- */
+body.ephemeral-page nav {
   position: fixed;
   top: 0;
   left: 0;
@@ -35,20 +38,18 @@ nav {
   padding: 0.75em 2em;
   display: flex;
   z-index: 2;
-
-  /* --- APPLE GLASSMORPHISM COMPONENT --- */
-  background: rgba(0, 0, 0, 0.15);            /* Transparent dark tint to complement your pure black backdrop */
-  backdrop-filter: blur(20px);                /* The actual frosted glass blur engine */
-  -webkit-backdrop-filter: blur(20px);        /* Safari support */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* Crisp premium top-edge highlight */
+  background: rgba(0, 0, 0, 0.15);            
+  backdrop-filter: blur(20px);                
+  -webkit-backdrop-filter: blur(20px);        
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08); 
 }
 
-nav .nav-item {
+body.ephemeral-page nav .nav-item {
   flex: 1;
 }
 
-nav .nav-item p {
-  color: #ffffff;
+body.ephemeral-page nav .nav-item p {
+  color: #ffffff; /* Pure White Text for Dark Theme */
   text-decoration: none;
   margin: 0 20px;
   font-size: 15px;
@@ -61,34 +62,26 @@ nav .nav-item p {
   transition: opacity 0.2s ease;
 }
 
-nav .nav-item p::before,
-nav .nav-item p::after {
+body.ephemeral-page nav .nav-item p::before,
+body.ephemeral-page nav .nav-item p::after {
   position: absolute;
   align-items: center;
   opacity: 0;
-  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1),
-    opacity 0.3s ease;
+  color: #ffffff;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease;
 }
 
-nav .nav-item p::before {
-  content: "[";
-  left: -12px;
-  transform: translateX(-10px);
-}
+body.ephemeral-page nav .nav-item p::before { content: "["; left: -12px; transform: translateX(-10px); }
+body.ephemeral-page nav .nav-item p::after { content: "]"; right: -12px; transform: translateX(10px); }
 
-nav .nav-item p::after {
-  content: "]";
-  right: -12px;
-  transform: translateX(10px);
-}
-
-nav .nav-item p:hover::before,
-nav .nav-item p:hover::after {
+body.ephemeral-page nav .nav-item p:hover::before,
+body.ephemeral-page nav .nav-item p:hover::after {
   opacity: 1;
   transform: translateX(0);
 }
 
-.img-previews {
+/* --- SYSTEM INTERFACES --- */
+.ephemeral-body .img-previews {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -97,172 +90,69 @@ nav .nav-item p:hover::after {
   opacity: 0;
 }
 
-.img-previews img {
+.ephemeral-body .img-previews img {
   width: 600px;
   height: 700px;
   padding: 1em 0;
   margin-bottom: 4em;
-
 }
 
 body.ephemeral-page.ephemeral-can-scroll .img-previews {
   visibility: visible;
-  position: relative; /* Switch from absolute to relative to populate native document height for layout-2 */
-
+  position: relative; 
 }
 
-
-
-.gallery-container {
+.ephemeral-body .gallery-container {
   width: 100%;
   padding-top: 4em;
   background: #000;
 }
 
-.gallery.layout-1-gallery {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  transform: translateX(0%);
-}
+/* --- RESPONSIVE LAYOUT MATRIXES --- */
+.ephemeral-body .gallery.layout-1-gallery { position: absolute; width: 100%; height: 100%; transform: translateX(0%); }
+.ephemeral-body .gallery.layout-1-gallery .img { position: absolute; width: 100px; aspect-ratio: 8.5 / 11; }
 
-.gallery.layout-1-gallery .img {
-  position: absolute;
-  width: 100px;
-  aspect-ratio: 8.5 / 11;
-}
+.ephemeral-body .gallery.layout-2-gallery { padding-top: 0.5em; position: fixed; top: 50%; left: 10%; transform: translateX(0%); }
+.ephemeral-body .gallery.layout-2-gallery .img { width: 75px; height: 100px; margin-bottom: 1em; }
 
-.gallery.layout-2-gallery {
-  padding-top: 0.5em;
-  position: fixed;
-  top: 50%;
-  left: 10%;
-  transform: translateX(0%);
-}
+.ephemeral-body .gallery.layout-3-gallery { position: relative; width: 100%; height: 100%; transform: translateX(0%); margin-right: 10%; }
+.ephemeral-body .gallery.layout-3-gallery .img { position: absolute; right: 4em; width: 300px; height: 400px; }
 
-.gallery.layout-2-gallery .img {
-  width: 75px;
-  height: 100px;
-  margin-bottom: 1em;
-}
+/* LAYOUT 1 PIN PLACEMENTS */
+.ephemeral-body .gallery.layout-1-gallery #img1, .ephemeral-body .gallery.layout-1-gallery #img2, .ephemeral-body .gallery.layout-1-gallery #img3, .ephemeral-body .gallery.layout-1-gallery #img4 { top: 0%; }
+.ephemeral-body .gallery.layout-1-gallery #img5, .ephemeral-body .gallery.layout-1-gallery #img6, .ephemeral-body .gallery.layout-1-gallery #img7, .ephemeral-body .gallery.layout-1-gallery #img8 { top: 22.5%; }
+.ephemeral-body .gallery.layout-1-gallery #img9, .ephemeral-body .gallery.layout-1-gallery #img10 { top: 45%; }
+.ephemeral-body .gallery.layout-1-gallery #img11, .ephemeral-body .gallery.layout-1-gallery #img12 { top: 67.5%; }
+.ephemeral-body .gallery.layout-1-gallery #img1, .ephemeral-body .gallery.layout-1-gallery #img5, .ephemeral-body .gallery.layout-1-gallery #img11, .ephemeral-body .gallery.layout-1-gallery #img9 { left: 2em; }
+.ephemeral-body .gallery.layout-1-gallery #img2 { left: 15%; }
+.ephemeral-body .gallery.layout-1-gallery #img3 { left: 45%; }
+.ephemeral-body .gallery.layout-1-gallery #img4, .ephemeral-body .gallery.layout-1-gallery #img10, .ephemeral-body .gallery.layout-1-gallery #img12 { left: 65%; }
+.ephemeral-body .gallery.layout-1-gallery #img6 { left: 25%; }
+.ephemeral-body .gallery.layout-1-gallery #img7 { right: 15%; }
+.ephemeral-body .gallery.layout-1-gallery #img8 { right: 2em; }
 
-
-.gallery.layout-3-gallery {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transform: translateX(0%);
-  margin-right: 10%;
-}
-
-.gallery.layout-3-gallery .img {
-  position: absolute;
-  right: 4em;
-  width: 300px;
-  height: 400px;
-}
-
-.gallery.layout-1-gallery #img1,
-.gallery.layout-1-gallery #img2,
-.gallery.layout-1-gallery #img3,
-.gallery.layout-1-gallery #img4 {
-  top: 0%;
-}
-
-.gallery.layout-1-gallery #img5,
-.gallery.layout-1-gallery #img6,
-.gallery.layout-1-gallery #img7,
-.gallery.layout-1-gallery #img8 {
-  top: 22.5%;
-}
-
-.gallery.layout-1-gallery #img9,
-.gallery.layout-1-gallery #img10 {
-  top: 45%;
-}
-
-.gallery.layout-1-gallery #img11,
-.gallery.layout-1-gallery #img12 {
-  top: 67.5%;
-}
-
-.gallery.layout-1-gallery #img1,
-.gallery.layout-1-gallery #img5,
-.gallery.layout-1-gallery #img11, .gallery.layout-1-gallery #img9
-{
-  left: 2em;
-}
-
-.gallery.layout-1-gallery #img2 {
-  left: 15%;
-}
-
-.gallery.layout-1-gallery #img3 {
-  left: 45%;
-}
-
-.gallery.layout-1-gallery #img4,
-.gallery.layout-1-gallery #img10,
-.gallery.layout-1-gallery #img12 {
-  left: 65%;
-}
-
-.gallery.layout-1-gallery #img6 {
-  left: 25%;
-}
-
-.gallery.layout-1-gallery #img7 {
-  right: 15%;
-}
-
-.gallery.layout-1-gallery #img8 {
-  right: 2em;
-}
-
-.minimap {
+.ephemeral-body .minimap {
   position: fixed;
   top: 51%;
   left: 12.5%;
   transform: translateX(-50%);
   width: 140px;
   height: 90px;
-  border: 1px solid #fff;
+  border: 1px solid #fff; /* Light frame boundary for dark background */
   border-radius: 2px;
   z-index: 2;
   visibility: hidden;
   opacity: 0;
 }
 
-/* lenis */
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-
-.lenis.lenis-stopped {
-  overflow: hidden;
-}
-
-.lenis.lenis-smooth iframe {
-  pointer-events: none;
-}
-
-
-.layout-3-text {
+/* --- ARTICLE TEXT SYSTEMS FOR DARK MODE --- */
+.ephemeral-body .layout-3-text {
   position: fixed;
   left: 4em;
-  
-  /* --- CHANGED: Anchor from 50% top instead of 20% --- */
-  top: 55%; 
-  transform: translateY(-50%); /* This perfectly centers the new larger height block */
-  
-  /* --- SAFETIES: Prevent clipping on smaller laptop windows --- */
+  top: 40%; 
+  transform: translateY(-50%); 
   max-height: 70vh;
   overflow-y: auto;
-  
   width: 60%;
   color: #fff;
   opacity: 0;
@@ -272,18 +162,17 @@ body.ephemeral-page.ephemeral-can-scroll .img-previews {
   z-index: 3;
 }
 
-.layout-3-text h1 {
-  /* REMOVED: top: 100px; (This does nothing on a standard block element and causes tracking bugs) */
+.ephemeral-body .layout-3-text h1 {
   font-size: 56px;
   line-height: 0.95;
   letter-spacing: -0.04em;
   margin-bottom: 0.35em;
-  color: #fff;
+  color: #fff; /* Luminous white headline */
 }
 
-.layout-3-text p {
+.ephemeral-body .layout-3-text p {
   font-size: 16px;
   line-height: 1.4;
-  color: #d6d4d4;
-  padding-bottom: 1.2em; /* Adds clean editorial space between your paragraphs */
+  color: #d6d4d4; /* Soft readable platinum body copy */
+  padding-bottom: 1.2em; 
 }

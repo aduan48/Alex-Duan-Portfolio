@@ -1,0 +1,178 @@
+/* --- GLOBAL BODY LOCKS FOR COLBY --- */
+body.colby-page {
+  --bg: #fff;
+  background: #fff !important;
+  overflow: hidden !important; 
+  height: 100vh;
+}
+
+body.colby-page.colby-can-scroll {
+  overflow-y: auto !important; 
+  height: auto; 
+}
+
+body.colby-page #root {
+  background: #fff;
+}
+
+/* --- WRAPPER & MEDIA SCALERS --- */
+.colby-body {
+  background: #fff;
+  min-height: 100vh;
+  position: relative;
+}
+
+.colby-body img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* --- LIGHT INTELLECTUAL NAVIGATION --- */
+body.colby-page nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  padding: 0.75em 2em;
+  display: flex;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.4);            
+  backdrop-filter: blur(20px);                
+  -webkit-backdrop-filter: blur(20px);        
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06); 
+}
+
+body.colby-page nav .nav-item {
+  flex: 1;
+}
+
+body.colby-page nav .nav-item p {
+  color: #000000; /* Pure Black Text for Light Theme */
+  text-decoration: none;
+  margin: 0 20px;
+  font-size: 15px;
+  font-weight: 700;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  text-transform: none;
+  padding: 1em 0.25em;
+  transition: opacity 0.2s ease;
+}
+
+body.colby-page nav .nav-item p::before,
+body.colby-page nav .nav-item p::after {
+  position: absolute;
+  align-items: center;
+  opacity: 0;
+  color: #000000;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease;
+}
+
+body.colby-page nav .nav-item p::before { content: "["; left: -12px; transform: translateX(-10px); }
+body.colby-page nav .nav-item p::after { content: "]"; right: -12px; transform: translateX(10px); }
+
+body.colby-page nav .nav-item p:hover::before,
+body.colby-page nav .nav-item p:hover::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* --- SYSTEM INTERFACES --- */
+.colby-body .img-previews {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30%;
+  opacity: 0;
+}
+
+.colby-body .img-previews img {
+  width: 600px;
+  height: 700px;
+  padding: 1em 0;
+  margin-bottom: 4em;
+}
+
+body.colby-page.colby-can-scroll .img-previews {
+  visibility: visible;
+  position: relative; 
+}
+
+.colby-body .gallery-container {
+  width: 100%;
+  padding-top: 4em;
+  background: #fff;
+}
+
+/* --- RESPONSIVE LAYOUT MATRIXES --- */
+.colby-body .gallery.layout-1-gallery { position: absolute; width: 100%; height: 100%; transform: translateX(0%); }
+.colby-body .gallery.layout-1-gallery .img { position: absolute; width: 100px; aspect-ratio: 8.5 / 11; }
+
+.colby-body .gallery.layout-2-gallery { padding-top: 0.5em; position: fixed; top: 50%; left: 10%; transform: translateX(0%); }
+.colby-body .gallery.layout-2-gallery .img { width: 75px; height: 100px; margin-bottom: 1em; }
+
+.colby-body .gallery.layout-3-gallery { position: relative; width: 100%; height: 100%; transform: translateX(0%); margin-right: 10%; }
+.colby-body .gallery.layout-3-gallery .img { position: absolute; right: 4em; width: 300px; height: 400px; }
+
+/* LAYOUT 1 PIN PLACEMENTS */
+.colby-body .gallery.layout-1-gallery #img1, .colby-body .gallery.layout-1-gallery #img2, .colby-body .gallery.layout-1-gallery #img3, .colby-body .gallery.layout-1-gallery #img4 { top: 0%; }
+.colby-body .gallery.layout-1-gallery #img5, .colby-body .gallery.layout-1-gallery #img6, .colby-body .gallery.layout-1-gallery #img7, .colby-body .gallery.layout-1-gallery #img8 { top: 22.5%; }
+.colby-body .gallery.layout-1-gallery #img9, .colby-body .gallery.layout-1-gallery #img10 { top: 45%; }
+.colby-body .gallery.layout-1-gallery #img11, .colby-body .gallery.layout-1-gallery #img12 { top: 67.5%; }
+.colby-body .gallery.layout-1-gallery #img1, .colby-body .gallery.layout-1-gallery #img5, .colby-body .gallery.layout-1-gallery #img11, .colby-body .gallery.layout-1-gallery #img9 { left: 2em; }
+.colby-body .gallery.layout-1-gallery #img2 { left: 15%; }
+.colby-body .gallery.layout-1-gallery #img3 { left: 45%; }
+.colby-body .gallery.layout-1-gallery #img4, .colby-body .gallery.layout-1-gallery #img10, .colby-body .gallery.layout-1-gallery #img12 { left: 65%; }
+.colby-body .gallery.layout-1-gallery #img6 { left: 25%; }
+.colby-body .gallery.layout-1-gallery #img7 { right: 15%; }
+.colby-body .gallery.layout-1-gallery #img8 { right: 2em; }
+
+.colby-body .minimap {
+  position: fixed;
+  top: 51%;
+  left: 12.5%;
+  transform: translateX(-50%);
+  width: 140px;
+  height: 90px;
+  border: 1px solid #000; /* Dark frame boundary for light background */
+  border-radius: 2px;
+  z-index: 2;
+  visibility: hidden;
+  opacity: 0;
+}
+
+/* --- ARTICLE TEXT SYSTEMS FOR LIGHT MODE --- */
+.colby-body .layout-3-text {
+  position: fixed;
+  left: 4em;
+  top: 40%; 
+  transform: translateY(-50%); 
+  max-height: 70vh;
+  overflow-y: auto;
+  width: 60%;
+  color: #000;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  text-align: left;
+  z-index: 3;
+}
+
+.colby-body .layout-3-text h1 {
+  font-size: 56px;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  margin-bottom: 0.35em;
+  color: #000000; /* Crisp dark headline */
+}
+
+.colby-body .layout-3-text p {
+  font-size: 16px;
+  line-height: 1.4;
+  color: #333333; /* Elegant muted dark charcoal body copy */
+  padding-bottom: 1.2em; 
+}

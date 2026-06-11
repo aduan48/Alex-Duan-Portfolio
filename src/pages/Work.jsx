@@ -16,6 +16,11 @@ function Work() {
             View Ephemeral Work
           </button>
         </Link>
+        <Link to="/work/colby">
+          <button>
+            View Colby Work
+          </button>
+        </Link>
       </div>
     </div>
   )
