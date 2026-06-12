@@ -8,7 +8,7 @@ import FluidCanvas from '../components/FluidCanvasBW';
 
 import '../styles/Colby.css';
 import { Link } from 'react-router-dom';
-import transition from '../transition';
+import transition from '../transitionGallery';
 
 import slide1 from '../colby_portfolio/slide-1.webp';
 import slide2 from '../colby_portfolio/slide-2.webp';

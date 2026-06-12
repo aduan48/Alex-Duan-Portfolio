@@ -2,7 +2,7 @@
   /* High-contrast, bold black and white palette */
   --text: #000000;
   --text-h: #000000;
-  --bg: #ffffff;
+  --bg: #000000;
   --code-bg: #f5f5f5;
   
   /* Removed colors/borders; fallback to transparent/none where needed */

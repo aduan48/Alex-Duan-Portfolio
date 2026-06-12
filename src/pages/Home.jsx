@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import FluidCanvas from '../components/FluidCanvas';
+import transition from '../transitionGallery'
 import '../styles/Home.css';
 
 function Home() {
@@ -44,4 +45,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default transition(Home);

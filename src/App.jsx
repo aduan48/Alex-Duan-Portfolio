@@ -7,6 +7,8 @@ import Home from './pages/Home'
 import Work from './pages/Work'
 import Ephemeral from './pages/Ephemeral';
 import Colby from './pages/Colby';
+import ClubHockey from './pages/ClubHockey'
+import Dragons from './pages/Dragons'
 import { AnimatePresence } from 'framer-motion';
 
 // 2. Created a wrapper component to safely access useLocation
@@ -25,6 +27,8 @@ function AnimatedRoutes() {
         <Route path="/register" element={<Home />} />
         <Route path="/work/ephemeral" element={<Ephemeral />} />
         <Route path="/work/colby" element={<Colby />} />
+        <Route path="/work/club-hockey" element={<ClubHockey />} />
+        <Route path="/work/dragons" element={<Dragons />} />
       </Routes>
     </AnimatePresence>
   );

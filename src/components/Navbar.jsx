@@ -5,7 +5,7 @@ import '../styles/Navbar.css';
 function Navbar() {
   const [openLinks, setOpenLinks] = useState(true);
   const location = useLocation();
-  const isEphemeralPage = location.pathname === '/work/ephemeral' || location.pathname === '/work/colby';
+  const isHidden = location.pathname === '/work/ephemeral' || location.pathname === '/work/colby'  || location.pathname === '/work/club-hockey'  || location.pathname === '/work/dragons';
 
 
   const toggleNavbar = () => {
@@ -13,7 +13,7 @@ function Navbar() {
   };
 
   return (
-    <div className={`navbar ${!openLinks ? 'menu-closed' : ''} ${isEphemeralPage ? 'hidden-nav' : ''}`}>
+    <div className={`navbar ${!openLinks ? 'menu-closed' : ''} ${isHidden ? 'hidden-nav' : ''}`}>
       <div className='leftSide'> 
         <Link to="/home"> PORTFOLIO </Link>
       </div>
