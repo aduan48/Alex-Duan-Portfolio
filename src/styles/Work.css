@@ -1,4 +1,4 @@
-/* --- Add these new classes to your CSS --- */
+
 
 .project-header {
   display: flex;
@@ -32,6 +32,7 @@
   /* NEW: Keeps the layout from stretching endlessly on massive monitors */
   max-width: 1100px;
   margin: 0 auto; 
+  margin-bottom: 200px;
 }
 
 .Work a {
@@ -105,3 +106,99 @@
   height: 100%;
   z-index: -1;
 }
+
+/* --- SLEEK SIDEBAR MINIMAP STRUCTURE --- */
+.work-minimap {
+  position: fixed;
+  left: 3%;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 15px;
+  z-index: 500;
+  height: 220px;
+  user-select: none;
+}
+
+/* Vertical track architecture line */
+.minimap-track-wrapper {
+  width: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  position: relative;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+/* Fluid dynamic filler bar */
+.minimap-progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #ffffff;
+  transition: height 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Text groups stack mapping box */
+.minimap-labels {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+/* Individual node row behaviors */
+.minimap-node {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  opacity: 0.25;
+  transform: translateX(-4px);
+  transition: opacity 0.4s cubic-bezier(0.25, 1, 0.3, 1), transform 0.4s cubic-bezier(0.25, 1, 0.3, 1);
+}
+
+.node-number {
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.node-title {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* --- INTERACTIVE STATE STATES --- */
+
+/* Reveal full label when hovered */
+.minimap-node:hover {
+  opacity: 0.8;
+  transform: translateX(0px);
+}
+.minimap-node:hover .node-title {
+  opacity: 0.7;
+  transform: translateX(0px);
+}
+
+/* Active index tracking state via Intersection Observer variables */
+.minimap-node.active {
+  opacity: 1;
+  transform: translateX(0px);
+}
+
+.minimap-node.active .node-title {
+  opacity: 1;
+  transform: translateX(0px);
+}
+
+/* Responsive clean breakpoint hide for small phone form factors */

@@ -47,7 +47,7 @@ p {
 
 .home-logo h1{
   color: #fff !important; 
-  font-size: 150px;
+  font-size: 10em;
   transform: translateY(100%);
 
   margin: 0;            /* Removes default browser margins pushing the text out */

@@ -24,10 +24,11 @@
 }
 
 .navbar .leftSide {
-  flex: 30%; /* Gives the left side a reliable base footprint */
+  flex: 25%; /* Gives the left side a reliable base footprint */
   height: 100%;
   display: flex;
   align-items: center;
+  justify-content: flex-start; 
   padding-left: 40px; 
 }
 
@@ -42,12 +43,12 @@
 }
 
 .navbar .rightSide {
-  flex: 20%;
+  flex: 25%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: flex-end; 
-  padding-right: 30px;
+  padding-right: 40px;
 }
 
 .navbar .contact-wrapper {
