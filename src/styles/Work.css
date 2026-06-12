@@ -1,9 +1,107 @@
+/* --- Add these new classes to your CSS --- */
+
+.project-header {
+  display: flex;
+  justify-content: space-between; /* Pushes title to the left, links to the right */
+  align-items: flex-end;          /* Aligns baseline/bottom edges perfectly */
+  border-bottom: 1px solid #eee;  /* Optional: adds a nice baseline anchor */
+  padding-bottom: 5px;            /* Optional: spacing above paragraph */
+  margin-bottom: 15px;            /* Spacing between header and description */
+}
+
+.project-title h2 {
+  margin: 0;                     /* Removes default browser margins messing up alignment */
+  line-height: 1;                /* Keeps the bounding box tight to the text bottom */
+}
+
+.work-links {
+  display: flex;
+  align-items: center;           /* Ensures the links themselves share a center line */
+}
+
+/* --- Your existing CSS (with a slight tweak) --- */
+
 .Work {
-  /* Adjust this number based on how tall your navbar is (e.g., 60px, 80px) */
-  padding-top: 65px; 
-  
-  /* These keep your flexbox structure from index.css working beautifully */
+  padding-top: 80px; /* Slightly more breathing room from navbar */
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  padding-left: 15%;
+  padding-right: 15%;
+  
+  /* NEW: Keeps the layout from stretching endlessly on massive monitors */
+  max-width: 1100px;
+  margin: 0 auto; 
+}
+
+.Work a {
+  color: white; 
+  text-decoration: none;
+  margin-left: 20px;            /* Tweak: Changed from 'margin: 0 20px' so the right link stays flush right */
+  margin-right: 0;
+  font-size: 16px; 
+  font-weight: 700; 
+  position: relative;
+  display: inline-block;
+  transition: opacity 0.2s ease;
+}
+
+.Work a::before, .Work a::after {
+  position: absolute;
+  align-items: center;
+  opacity: 0;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease;
+}
+.Work a::before { content: "["; left: -12px; transform: translateX(-10px); }
+.Work a::after { content: "]"; right: -12px; transform: translateX(10px); }
+
+.Work a:hover::before, .Work a:hover::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.content{
+
+  padding-top: 10px;
+  padding-bottom: 1em;
+  padding-left: 10px;
+  padding-right: 12px;
+  border-radius: 12px;
+
+      background: rgba(209, 209, 209, 0.4);            
+  backdrop-filter: blur(20px);                
+  -webkit-backdrop-filter: blur(20px); 
+}
+
+.Work p {
+  color: rgb(235, 235, 235);
+  font-size: 16px;
+  line-height: 1.6;
+  text-align: justify;
+
+  
+}
+
+.Work .project-block{
+  text-align: left;
+  margin-bottom: 60px;
+}
+
+.Work h1 {
+  letter-spacing: 2px;
+  margin-bottom: 60px; 
+  color: white; 
+}
+
+.Work h2{
+  color: white; 
+}
+
+.gradient-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 }

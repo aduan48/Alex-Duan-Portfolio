@@ -4,6 +4,7 @@ import Lenis from '@studio-freight/lenis';
 import { Flip } from 'gsap/Flip';
 import { CustomEase } from 'gsap/CustomEase';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
+import FluidCanvas from '../components/FluidCanvasBW';
 
 import '../styles/Ephemeral.css';
 import { Link } from 'react-router-dom';
@@ -255,6 +256,7 @@ function Ephemeral() {
           </Link>
         </div>
 
+
         <div className="nav-item">
           <p id="layout-1-gallery">Gallery</p>
         </div>
@@ -309,7 +311,11 @@ function Ephemeral() {
           <img src={slide} alt="" key={index} />
         ))}
       </div>
+
+      <FluidCanvas className = "gradient-canvas"/>
     </div>
+
+    
   );
 }
 

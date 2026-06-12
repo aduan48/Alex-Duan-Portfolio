@@ -6,6 +6,9 @@
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   
   /* Apple Glassmorphism */   
+  background: rgba(219, 219, 219, 0.4);            
+  backdrop-filter: blur(20px);                
+  -webkit-backdrop-filter: blur(20px); 
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   
   position: fixed;
@@ -13,6 +16,7 @@
   left: 0;
   right: 0;
   z-index: 1000;
+  
 }
 
 .navbar.menu-closed {
@@ -81,7 +85,7 @@
 /* --- HOVER BRACKET SANDWICHES --- */
 
 .navbar a {
-  color: var(--text, #000000); 
+  color: white; 
   text-decoration: none;
   margin: 0 20px;
   font-size: 15px; 
@@ -113,7 +117,7 @@
   font-family: inherit;
   font-size: 15px; 
   font-weight: 700;
-  color: var(--text, #000000); 
+  color: white; 
   padding: 0;
   margin-left: 25px;
   white-space: nowrap; 

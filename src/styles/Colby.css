@@ -1,7 +1,5 @@
 /* --- GLOBAL BODY LOCKS FOR COLBY --- */
 body.colby-page {
-  --bg: #fff;
-  background: #fff !important;
   overflow: hidden !important; 
   height: 100vh;
 }
@@ -11,13 +9,9 @@ body.colby-page.colby-can-scroll {
   height: auto; 
 }
 
-body.colby-page #root {
-  background: #fff;
-}
 
 /* --- WRAPPER & MEDIA SCALERS --- */
 .colby-body {
-  background: #fff;
   min-height: 100vh;
   position: relative;
 }
@@ -34,14 +28,15 @@ body.colby-page nav {
   top: 0;
   left: 0;
   width: 100%;
-  height: 70px;
-  padding: 0.75em 2em;
+  height: 65px; /* 1. Matched height exactly to .navbar */
+  padding: 0 2em; /* 2. Removed vertical padding so Flexbox handles centering */
   display: flex;
+  align-items: center; /* 3. Ensures text matches the vertical centering of .navbar */
   z-index: 2;
-  background: rgba(255, 255, 255, 0.4);            
+  background: rgba(219, 219, 219, 0.4);            
   backdrop-filter: blur(20px);                
-  -webkit-backdrop-filter: blur(20px);        
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06); 
+  -webkit-backdrop-filter: blur(20px); 
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 body.colby-page nav .nav-item {
@@ -49,7 +44,7 @@ body.colby-page nav .nav-item {
 }
 
 body.colby-page nav .nav-item p {
-  color: #000000; /* Pure Black Text for Light Theme */
+  color: black; /* Pure Black Text for Light Theme */
   text-decoration: none;
   margin: 0 20px;
   font-size: 15px;
@@ -109,13 +104,13 @@ body.colby-page.colby-can-scroll .img-previews {
 }
 
 /* --- RESPONSIVE LAYOUT MATRIXES --- */
-.colby-body .gallery.layout-1-gallery { position: absolute; width: 100%; height: 100%; transform: translateX(0%); }
+.colby-body .gallery.layout-1-gallery { position: absolute; width: 100%; height: 100%; transform: translateX(0%); margin-top: 20px;}
 .colby-body .gallery.layout-1-gallery .img { position: absolute; width: 100px; aspect-ratio: 8.5 / 11; }
 
 .colby-body .gallery.layout-2-gallery { padding-top: 0.5em; position: fixed; top: 50%; left: 10%; transform: translateX(0%); }
 .colby-body .gallery.layout-2-gallery .img { width: 75px; height: 100px; margin-bottom: 1em; }
 
-.colby-body .gallery.layout-3-gallery { position: relative; width: 100%; height: 100%; transform: translateX(0%); margin-right: 10%; }
+.colby-body .gallery.layout-3-gallery { position: relative; width: 100%; height: 100%; transform: translateX(0%); margin-right: 10%; margin-top: 2em;}
 .colby-body .gallery.layout-3-gallery .img { position: absolute; right: 4em; width: 300px; height: 400px; }
 
 /* LAYOUT 1 PIN PLACEMENTS */
@@ -149,7 +144,7 @@ body.colby-page.colby-can-scroll .img-previews {
 .colby-body .layout-3-text {
   position: fixed;
   left: 4em;
-  top: 40%; 
+  top: 45%; 
   transform: translateY(-50%); 
   max-height: 70vh;
   overflow-y: auto;
@@ -175,4 +170,20 @@ body.colby-page.colby-can-scroll .img-previews {
   line-height: 1.4;
   color: #333333; /* Elegant muted dark charcoal body copy */
   padding-bottom: 1.2em; 
+}
+
+.gradient-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -10;
+  pointer-events: none;
+}
+
+.colby-body .gallery-container {
+  width: 100%;
+  padding-top: 4em;
+  background: transparent; /* Allows the fixed Fluid Canvas in the background to remain visible */
 }

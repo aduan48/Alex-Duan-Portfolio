@@ -4,6 +4,7 @@ import Lenis from '@studio-freight/lenis';
 import { Flip } from 'gsap/Flip';
 import { CustomEase } from 'gsap/CustomEase';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
+import FluidCanvas from '../components/FluidCanvasBW';
 
 import '../styles/Colby.css';
 import { Link } from 'react-router-dom';
@@ -52,6 +53,14 @@ function Colby() {
   const layoutTextRef = useRef(null);
   const activeLayoutRef = useRef('layout-1-gallery');
   const lenisRef = useRef(null);
+
+
+  const lightTheme = {
+    color1: "#ffffff",
+    color2: "#ffffff",
+    color3: "#cccccc",
+    color4: "#ffffff"
+  };
 
   useEffect(() => {
     document.body.classList.add('colby-page');
@@ -314,6 +323,8 @@ function Colby() {
           <img src={slide} alt="" key={index} />
         ))}
       </div>
+
+      <FluidCanvas className = "gradient-canvas" colors={lightTheme}/>
     </div>
   );
 }

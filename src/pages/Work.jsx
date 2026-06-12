@@ -1,29 +1,50 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import transition from '../transition';
 import '../styles/Work.css'
+import FluidCanvas from '../components/FluidCanvas';
 
 function Work() {
   return (
     <div className='Work'>
+      <FluidCanvas className = "gradient-canvas"/>
       <h1>PROJECTS</h1>
-      <p>Hello world</p>
-      
-      {/* This button will change the URL to /work/ephemeral without reloading the page */}
-      <div style={{ marginTop: '20px' }}>
-        <Link to="/work/ephemeral">
-          <button>
-            View Ephemeral Work
-          </button>
-        </Link>
-        <Link to="/work/colby">
-          <button>
-            View Colby Work
-          </button>
-        </Link>
+      <div>
+        <div className='project-block'>
+          <div className='project-header'>
+            <div className='project-title'>
+              <h2>EPHEMERAL</h2>
+            </div>
+            <div className='work-links'>
+              <Link to="/work/ephemeral"> VIEW </Link>
+              <a href="https://www.instagram.com/ephemeral.nova/" target="_blank" rel="noopener noreferrer">
+                INSTAGRAM
+              </a>
+            </div>
+          </div>
+          <div className='content'>
+            <p>A visual exploration of distortion, memory, and digital impermanence that moves beyond minimalism into sensory-driven design. Centered around intimate, striking portraiture, the collection establishes an immediate psychological connection with the viewer. This moody, cinematic tension is brought to life through a high-contrast, late-night palette of deep blacks, glowing neons, and burning ambers that pulse with kinetic energy.</p>
+          </div>
+        </div>
+
+        <div className='project-block'>
+          <div className='project-header'>
+            <div className='project-title'>
+              <h2>COLBY SOCCER</h2>
+            </div>
+            <div className='work-links'>
+              <Link to="/work/colby"> VIEW </Link>
+              <a href="https://www.instagram.com/colbymsoccer/" target="_blank" rel="noopener noreferrer">
+                INSTAGRAM
+              </a>
+            </div>
+          </div>
+          <div className='content'>
+            <p>A dynamic visual exploration of collegiate athletic identity and momentum that shifts sports promotion into narrative-driven design. Utilizing sharp diagonal layouts, vertical typography, and split-frame compositions, the collection captures the high-stakes kinetic energy of the game without relying on repetitive templates. The work leverages a fierce, cinematic palette of institutional Colby Blue, crisp whites, and atmospheric textures to anchor the audience directly into the team's athletic universe.</p>
+          </div>
+        </div>
       </div>
     </div>
   )
 }
 
-export default transition(Work)
+export default Work
