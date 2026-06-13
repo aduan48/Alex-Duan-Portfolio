@@ -260,20 +260,20 @@ function Colby() {
       <nav ref={navRef}>
         <div className="nav-item">
           <Link to="/work">
-            <p>Back</p>
+            <p>BACK</p>
           </Link>
         </div>
 
         <div className="nav-item">
-          <p id="layout-1-gallery">Gallery</p>
+          <p id="layout-1-gallery">GALLERY</p>
         </div>
 
         <div className="nav-item">
-          <p id="layout-2-gallery">Detailed</p>
+          <p id="layout-2-gallery">DETAILED</p>
         </div>
 
         <div className="nav-item">
-          <p id="layout-3-gallery">Info</p>
+          <p id="layout-3-gallery">INFO</p>
         </div>
       </nav>
 

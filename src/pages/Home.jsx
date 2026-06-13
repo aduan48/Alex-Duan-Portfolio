@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import FluidCanvas from '../components/FluidCanvas';
 import transition from '../transitionGallery'
 import '../styles/Home.css';
+import { Link } from 'react-router-dom'
 
 function Home() {
   const titleRef = useRef(null);
@@ -33,7 +34,9 @@ function Home() {
       <FluidCanvas className = "gradient-canvas"/>
 
       <div className='home-logo'>
+        <Link to = "/work">
           <h1 ref={titleRef}>ALEX DUAN</h1>
+        </Link>
       </div>
       
       <div className='home-footer'>

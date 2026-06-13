@@ -43,16 +43,49 @@ p {
 
   overflow: hidden;
   padding: 20px 0;
+  text-align: center;
 }
 
-.home-logo h1{
+.home-logo h1 {
   color: #fff !important; 
   font-size: 10em;
-  transform: translateY(100%);
-
-  margin: 0;            /* Removes default browser margins pushing the text out */
-  line-height: 1;       /* Restricts the phantom line box height */
+  margin: 0;            
+  line-height: 1;       
   display: inline-block;
+  position: relative;
+  cursor: pointer;
+  
+  letter-spacing: 0em;
+  margin-right: 0em;
+  
+  /* Smooth transitions for the core text */
+
+  transition: letter-spacing 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+              text-shadow 0.4s ease,
+              transform 0.4s ease;
+}
+
+/* The Animated Accent Line */
+.home-logo h1::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  width: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #b258a6, #66d1fe); /* Cool cyberpunk gradient */
+  transform: translateX(-50%);
+  transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Hover States */
+.home-logo h1:hover {
+  letter-spacing: 0.03em; /* Elegant breathing room effect */
+  margin-right: -0.03em;
+}
+
+.home-logo h1:hover::after {
+  width: 102%; /* Line expands outwards from the center */
 }
 
 .gradient-canvas {

@@ -1,0 +1,167 @@
+/* Container Viewport Frame setup with 3D Perspective Context */
+.dragons-body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  padding-left: 5%;
+  padding-right: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1500px; /* Crucial: Sets up the 3D view plane */
+}
+
+/* 3D Track wrapper holding the slide items */
+.slider-track {
+  width: 90vw;
+  height: 95vh;
+  position: relative;
+  transform-style: preserve-3d; /* Tells elements to keep their depth space positioning */
+}
+
+/* Unified Card Deck Slide setup */
+.Slides {
+  width: 100%;
+  height: 100%;
+  position: absolute; 
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  
+  background: rgba(201, 201, 201, 0.1);            
+  backdrop-filter: blur(20px);                
+  -webkit-backdrop-filter: blur(20px); 
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+/* Ensure background videos scale correctly to fill the frame */
+.Slides video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 90%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
+/* Typography fix for wide custom fonts and GSAP masking bounds */
+.Slides h1 {
+  color: white;
+  margin: 0;
+  line-height: 1.3; 
+  padding: 0.1em 0; 
+}
+
+.Slides h1 div {
+  padding-bottom: 0.15em !important;
+  margin-bottom: -0.15em !important;
+  line-height: inherit;
+}
+
+/* Padding modifications for specific structural cards */
+#slide-2 {
+  padding: 40px 20px;
+}
+
+/* Fluid background layout layer placement */
+.gradient-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -10;
+  pointer-events: none;
+}
+
+/* --- FIXED SEMANTIC 3D NAVIGATION BASE --- */
+.dragons-body nav.nav-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 65px; 
+  padding: 0 2em; 
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;            
+  
+  /* Pushes navbar physically in front of all 3D transforming slides */
+  z-index: 999; 
+}
+
+.dragons-body nav.nav-container .nav-item {
+  flex: 0 1 auto;
+}
+
+/* Ensure the Link tag doesn't introduce default underline styles */
+.dragons-body nav.nav-container .nav-item a {
+  text-decoration: none;
+}
+
+/* Global navigation text adjustments */
+.dragons-body nav.nav-container .nav-item p {
+  color: #ffffff; 
+  font-size: 15px;
+  font-weight: 700;
+  position: relative;
+  display: inline-block;
+  text-transform: none;
+  padding: 0.5em 0.25em;
+  margin: 0;
+}
+
+/* Give the back button link a pointer cursor */
+.dragons-body nav.nav-container .back-btn p {
+  cursor: pointer;
+}
+
+/* Remove pointer cursor from the name brand so it feels like a static label */
+.dragons-body nav.nav-container .name-brand p {
+  cursor: default;
+}
+
+/* --- FIXED HOVER BRACKETS ANIMATIONS (TARGETING .back-btn ONLY) --- */
+.dragons-body nav.nav-container .back-btn p::before,
+.dragons-body nav.nav-container .back-btn p::after {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%); 
+  opacity: 0;
+  color: #ffffff;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease;
+}
+
+.dragons-body nav.nav-container .back-btn p::before { 
+  content: "["; 
+  left: -15px; 
+  transform: translate(-10px, -50%); 
+}
+
+.dragons-body nav.nav-container .back-btn p::after { 
+  content: "]"; 
+  right: -15px; 
+  transform: translate(10px, -50%); 
+}
+
+/* --- HOVER ACTIVE TRIGGER STATES (TARGETING .back-btn ONLY) --- */
+.dragons-body nav.nav-container .back-btn p:hover::before {
+  opacity: 1;
+  transform: translate(0, -50%);
+}
+
+.dragons-body nav.nav-container .back-btn p:hover::after {
+  opacity: 1;
+  transform: translate(0, -50%);
+}
