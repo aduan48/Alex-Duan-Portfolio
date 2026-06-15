@@ -1,0 +1,124 @@
+<div class="flowchart-container">
+  <!-- Step 1 -->
+  <div class="flow-step">
+    <div class="step-number">1</div>
+    <div class="step-title">React Frontend</div>
+    <div class="step-desc">User completes multi-step wizard; data is saved via <code>localStorage</code>.</div>
+  </div>
+
+  <div class="flow-arrow">&rarr;</div>
+
+  <!-- Step 2 -->
+  <div class="flow-step">
+    <div class="step-number">2</div>
+    <div class="step-title">PayPal Verification</div>
+    <div class="step-desc">Isolates async payment lifecycle using a decoupled <code>valuesRef</code>.</div>
+  </div>
+
+  <div class="flow-arrow">&rarr;</div>
+
+  <!-- Step 3 -->
+  <div class="flow-step">
+    <div class="step-number">3</div>
+    <div class="step-title">Netlify Function</div>
+    <div class="step-desc">Secure <code>POST</code> request acts as a secure API proxy middleware layer.</div>
+  </div>
+
+  <div class="flow-arrow">&rarr;</div>
+
+  <!-- Step 4 -->
+  <div class="flow-step">
+    <div class="step-number">4</div>
+    <div class="step-title">Google Apps Script</div>
+    <div class="step-desc">Parses fields and automatically maps keys to column headers.</div>
+  </div>
+
+  <div class="flow-arrow">&rarr;</div>
+
+  <!-- Step 5 -->
+  <div class="flow-step">
+    <div class="step-number">5</div>
+    <div class="step-title">Database & Email</div>
+    <div class="step-desc">Appends row to Google Sheet and triggers confirmation via Gmail API.</div>
+  </div>
+</div>
+
+<style>
+  .flowchart-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ffffff;
+    padding: 30px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #333333;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow-x: auto;
+    gap: 10px;
+  }
+
+  .flow-step {
+    flex: 1;
+    min-width: 160px;
+    background: #ffffff;
+    border: 2px solid #333333;
+    border-radius: 6px;
+    padding: 16px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    position: relative;
+  }
+
+  .step-number {
+    display: inline-block;
+    background-color: #333333;
+    color: #ffffff;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .step-title {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .step-desc {
+    font-size: 12px;
+    line-height: 1.4;
+    color: #666666;
+  }
+
+  .step-desc code {
+    font-family: monospace;
+    background-color: #f5f5f5;
+    padding: 2px 4px;
+    border-radius: 3px;
+  }
+
+  .flow-arrow {
+    font-size: 28px;
+    color: #999999;
+    user-select: none;
+    font-weight: 300;
+    padding: 0 5px;
+  }
+
+  @media (max-width: 900px) {
+    .flowchart-container {
+      flex-direction: column;
+    }
+    .flow-arrow {
+      transform: rotate(90px);
+      margin: 10px 0;
+    }
+  }
+</style>
