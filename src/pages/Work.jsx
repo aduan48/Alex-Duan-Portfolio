@@ -148,7 +148,7 @@ function Work() {
             </div>
           </div>
           <div className='content'>
-            <p>A visual exploration of distortion, memory, and digital impermanence that moves beyond minimalism into sensory-driven design. Centered around intimate, striking portraiture, the collection establishes an immediate psychological connection with the viewer. This moody, cinematic tension is brought to life through a high-contrast, late-night palette of deep blacks, glowing neons, and burning ambers that pulse with kinetic energy.</p>
+            <p>A sleek full-stack web experience built for the East Coast Dragons, blending sharp visual identity with functional tournament infrastructure. The site uses modern React patterns and refined CSS styling to create an on-brand digital presence that feels fast, polished, and athletic. Beyond the frontend, it integrates a secure registration system with PayPal payments and a Google Sheets backend, turning the website into both a promotional platform and a streamlined operational tool for managing player data, payments, and tournament signups.</p>
          </div>
         </div>
 

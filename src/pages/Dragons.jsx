@@ -11,6 +11,7 @@ import identity from '../dragons_website/dragons_identity.png'
 import jersey from '../dragons_website/dragons_jersey.png'
 import inGame from '../dragons_website/jersey_in_game.jpg'
 import flowchart from '../dragons_website/flowchart.png'
+import transition from '../transitionGallery'
 
 gsap.registerPlugin(SplitText);
 
@@ -393,4 +394,4 @@ function Dragons() {
   );
 }
 
-export default Dragons;
+export default transition(Dragons);
