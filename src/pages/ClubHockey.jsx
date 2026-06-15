@@ -5,8 +5,6 @@ import FluidCanvas from '../components/FluidCanvasBW';
 import { Link } from 'react-router-dom';
 import transition from '../transitionGallery';
 
-// Removed: SplitText initialization and registration tags
-
 function ClubHockey() {
 
 

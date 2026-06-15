@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
-import { SplitText } from 'gsap/SplitText';
 import landing from '../dragons_website/homepage_demo.mp4';
 import register from '../dragons_website/register_demo.png'
 import schedule from '../dragons_website/schedule_demo.mp4'
@@ -13,7 +12,6 @@ import inGame from '../dragons_website/jersey_in_game.jpg'
 import flowchart from '../dragons_website/flowchart.png'
 import transition from '../transitionGallery'
 
-gsap.registerPlugin(SplitText);
 
 function Dragons() {
   // Define your custom slide structures inside an array
@@ -22,7 +20,7 @@ function Dragons() {
       id: 'slide-0', 
       content: (
         <div className="slide-inner-content">
-          <h1 className="animate-text">Overview</h1> 
+          <h1>Overview</h1> 
           <p><strong>STACK:  </strong>React | JavaScript | HTML5/CSS3 | Netlify | Git | PayPal SDK | Google Sheets API</p>
           <p>This is a full-stack web application for the East Coast Dragons. 
             It utlizies modern React patterns and CSS styles for a sleek on-brand front end that matches the brand's identity
@@ -37,7 +35,7 @@ function Dragons() {
       id: 'slide-1', 
       content: (
         <div className="slide-inner-content">
-          <h1 className="animate-text">BRAND IDENTITY</h1> 
+          <h1 >BRAND IDENTITY</h1> 
           <img src = {identity} alt = '' />
           <p>The Dragons brand identity balances grassroots athletic grit with a mission-driven call for inclusivity, representation, and community. 
             The brand utilizes a high-contrast, bold color palette consisting of crisp white, a deep crimson red, and a sharp black. 
@@ -55,7 +53,7 @@ function Dragons() {
       id: 'slide-2',
       content: (
         <div className="slide-inner-content">
-          <h1 className="animate-text">Inspiration</h1>
+          <h1>Inspiration</h1>
           <div className='inspiration-block'>
             <img className = "img-side" src = {jersey} alt = '' />
             <div className='text-side'>
@@ -75,11 +73,11 @@ function Dragons() {
       id: 'slide-3',
       content: (
         <div className="slide-inner-content">
-          <h1 className="animate-text">Landing Page</h1>
-          <p className="animate-text"> The landing page features a dynamic looping video background. The video is an edit made by Alger Productions of our players in action during a tournament. Overlaying the video is our red white Dragons logo. Since the main purpose of this website is to register for a tournament, I included a register button that links to the register page on the navbar and on the landing page.
+          <h1>Landing Page</h1>
+          <p > The landing page features a dynamic looping video background. The video is an edit made by Alger Productions of our players in action during a tournament. Overlaying the video is our red white Dragons logo. Since the main purpose of this website is to register for a tournament, I included a register button that links to the register page on the navbar and on the landing page.
           </p>
           <div className='slide-footer'>
-          <p className="animate-text"> <strong>SCROLL NEXT FOR DEMO VIDEO</strong></p>
+          <p> <strong>SCROLL NEXT FOR DEMO VIDEO</strong></p>
           </div>
         </div>
       ),
@@ -99,12 +97,12 @@ function Dragons() {
       id: 'slide-5',
       content: (
         <div className="slide-inner-content">
-          <h1 className="animate-text">Register</h1>
+          <h1>Register</h1>
           <p>This tournament registration system connects a custom React frontend with a secure serverless backend to create a smooth, automated user experience. Players move through a multi-step registration wizard that saves progress locally, securely handles PayPal payments, and instantly triggers a backend workflow that saves the info on a Google Sheet and sends a confirmation email. Serverless functions act as a protected API layer, keeping Google Sheets endpoints, transaction logic, and automation details hidden from the client. The system dynamically manages pricing, logs registrations, and sends confirmation emails automatically, all without manual maintenance or separate server hosting costs.
           </p>
           <img src = {flowchart} alt = ''/>
           <div className='slide-footer'>
-            <p className="animate-text"> <strong>SCROLL NEXT FOR DEMO IMAGE</strong></p>
+            <p> <strong>SCROLL NEXT FOR DEMO IMAGE</strong></p>
           </div>
         </div>
       ),
@@ -121,12 +119,12 @@ function Dragons() {
       id: 'slide-7',
       content: (
         <div className="slide-inner-content">
-          <h1 className="animate-text">Schedule</h1>
-          <p className="animate-text"> This schedule system connects a React frontend with Netlify serverless functions to dynamically display tournament schedules and lineup information. The React component uses state to track the selected age group, defaulting to U18, and automatically fetches the correct schedule whenever the dropdown changes between the age groups. A separate backend request loads the full summer tournament lineup once when the page first opens. Instead of storing all schedule logic directly in the frontend, the app calls a Netlify function, which reads the selected group from the request URL and returns the correct JSON file for that team. The frontend then maps over the returned data and renders it into clean table rows for game dates, times, rinks, opponents, tournament names, and states. This creates a simple, maintainable schedule page where team-specific data can be updated through JSON files while the user gets an interactive dropdown-based experience.
+          <h1>Schedule</h1>
+          <p> This schedule system connects a React frontend with Netlify serverless functions to dynamically display tournament schedules and lineup information. The React component uses state to track the selected age group, defaulting to U18, and automatically fetches the correct schedule whenever the dropdown changes between the age groups. A separate backend request loads the full summer tournament lineup once when the page first opens. Instead of storing all schedule logic directly in the frontend, the app calls a Netlify function, which reads the selected group from the request URL and returns the correct JSON file for that team. The frontend then maps over the returned data and renders it into clean table rows for game dates, times, rinks, opponents, tournament names, and states. This creates a simple, maintainable schedule page where team-specific data can be updated through JSON files while the user gets an interactive dropdown-based experience.
             
           </p>
           <div className='slide-footer'>
-          <p className="animate-text"> <strong>SCROLL NEXT FOR DEMO VIDEO</strong></p>
+          <p > <strong>SCROLL NEXT FOR DEMO VIDEO</strong></p>
           </div>
         </div>
       ),
