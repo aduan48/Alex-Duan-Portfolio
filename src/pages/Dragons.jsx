@@ -10,6 +10,7 @@ import identity from '../dragons_website/dragons_identity.png'
 import jersey from '../dragons_website/dragons_jersey.png'
 import inGame from '../dragons_website/jersey_in_game.jpg'
 import flowchart from '../dragons_website/flowchart.png'
+import mobile from '../dragons_website/mobile_demo.mp4';
 import transition from '../transitionGallery'
 
 
@@ -140,6 +141,25 @@ function Dragons() {
         </div>
       ),
     },
+    {
+      id: 'slide-9',
+      content: (
+        <div className="slide-inner-content">
+          <div className='mobile-content'>
+            <div className='mobile-mov'>
+              <video autoPlay loop muted playsInline className="background-video">
+                <source src={mobile} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div className='mobile-text'>
+              <h1>Mobile UI/UX</h1>
+              <p>Recognizing that the vast majority of our user traffic originated from mobile devices, prioritizing a flawless responsive UX became a core focus of our design and development cycle. I engineered a highly adaptive interface that leverages fluid CSS layouts, media queries, and dynamic resizing to guarantee the structural view plane remains intact across varying screen sizes. To prevent complex spatial content—such as multi-column splits—from breaking, I implemented precision flexbox scaling, assigning dedicated percentage boundaries to preserve visual hierarchy. Furthermore, I overhauled the global navigation wrapper with responsive breakpoint listeners, cleanly compressing standard desktop navigational items into an interactive, animated hamburger menu on smaller screens to maximize layout real estate and retain intuitive usability.</p>
+            </div>
+          </div>
+        </div>
+      ),
+    },
   ];
 
   // React tracks unique object cards to animate rendering states
@@ -153,10 +173,11 @@ function Dragons() {
     { keyId: 6, slideIndex: 6 },
     { keyId: 7, slideIndex: 7 },
     { keyId: 8, slideIndex: 8 },
+    { keyId: 9, slideIndex: 9 },
   ]);
 
   const containerRef = useRef(null);
-  const keyCounter = useRef(9);
+  const keyCounter = useRef(10);
   const actionRef = useRef(null); // Tracks layout scroll 'up' or 'down'
 
   // Ref locks to decouple high frequency events from re-renders
