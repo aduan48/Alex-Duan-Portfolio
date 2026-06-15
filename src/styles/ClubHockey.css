@@ -1,5 +1,5 @@
 /* Container Viewport Frame setup with 3D Perspective Context */
-.dragons-body {
+.club-hockey-body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
@@ -64,58 +64,6 @@
   margin-top: 20%;
 }
 
-#slide-1 img{
-  width: 102%;
-}
-
-.slide-inner-content p{
-  font-size: 16px;
-  line-height: 1.4;
-  padding-bottom: 1.2em; 
-  color: #d6d4d4;
-}
-
-#slide-2 .inspiration-block {
-  display: flex;
-  flex-direction: row; 
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 15px; /* Gives nice breathing room between text and jersey image */
-  width: 100%;
-  margin-top: .7em;
-}
-
-/* 2. Target the paragraph tag directly to assign its flex layout */
-#slide-2 .inspiration-block  .text-side p {
-  flex: 1 1 50%; 
-  margin: 0;
-}
-
-#slide-2 .inspiration-block .text-side img {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-}
-
-
-/* 3. Corrected selector: The image IS the class element */
-#slide-2 .inspiration-block img.img-side {
-  flex: 1 1 30%;
-  top: 0;
-  max-width: 50%;
-  height: auto;
-  object-fit: contain; /* Ensures the jersey graphic doesn't get distorted */
-}
-
-
-#slide-3 .slide-inner-content{
-  margin-top: 20%;
-}
-
-#slide-5 img{
-  width: 100%;
-}
-
 /* Ensure background videos scale correctly to fill the frame */
 .Slides video {
   position: absolute;
@@ -127,19 +75,7 @@
   z-index: -1;
 }
 
-#slide-6 img {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 90%;
-  height: auto;
-  transform: translate(-50%, -50%);
-  z-index: -1;
-} 
 
-#slide-7 .slide-inner-content{
-  margin-top: 13%;
-}
 
 /* Typography fix for wide custom fonts and GSAP masking bounds */
 .Slides h1 {
@@ -156,7 +92,6 @@
 }
 
 
-
 /* Fluid background layout layer placement */
 .gradient-canvas {
   position: fixed;
@@ -169,7 +104,7 @@
 }
 
 /* --- FIXED SEMANTIC 3D NAVIGATION BASE --- */
-.dragons-body nav.nav-container {
+.club-hockey-body nav.nav-container {
   position: fixed;
   top: 0;
   left: 0;
@@ -184,17 +119,17 @@
   z-index: 999; 
 }
 
-.dragons-body nav.nav-container .nav-item {
+.club-hockey-body nav.nav-container .nav-item {
   flex: 0 1 auto;
 }
 
 /* Ensure the Link tag doesn't introduce default underline styles */
-.dragons-body nav.nav-container .nav-item a {
+.club-hockey-body nav.nav-container .nav-item a {
   text-decoration: none;
 }
 
 /* Global navigation text adjustments */
-.dragons-body nav.nav-container .nav-item a {
+.club-hockey-body nav.nav-container .nav-item a {
   color: #ffffff; 
   font-size: 15px;
   font-weight: 700;
@@ -206,15 +141,15 @@
 }
 
 /* Give the back button link a pointer cursor */
-.dragons-body nav.nav-container a {
+.club-hockey-body nav.nav-container a {
   cursor: pointer;
 }
 
 
 
 /* --- FIXED HOVER BRACKETS ANIMATIONS (TARGETING .back-btn ONLY) --- */
-.dragons-body nav.nav-container  a::before,
-.dragons-body nav.nav-container  a::after {
+.club-hockey-body nav.nav-container  a::before,
+.club-hockey-body nav.nav-container  a::after {
   position: absolute;
   top: 50%;
   transform: translateY(-50%); 
@@ -223,31 +158,31 @@
   transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease;
 }
 
-.dragons-body nav.nav-container  a::before { 
+.club-hockey-body nav.nav-container  a::before { 
   content: "["; 
   left: -15px; 
   transform: translate(-10px, -50%); 
 }
 
-.dragons-body nav.nav-container a::after { 
+.club-hockey-body nav.nav-container a::after { 
   content: "]"; 
   right: -15px; 
   transform: translate(10px, -50%); 
 }
 
 /* --- HOVER ACTIVE TRIGGER STATES (TARGETING .back-btn ONLY) --- */
-.dragons-body nav.nav-container a:hover::before {
+.club-hockey-body nav.nav-container a:hover::before {
   opacity: 1;
   transform: translate(0, -50%);
 }
 
-.dragons-body nav.nav-container a:hover::after {
+.club-hockey-body nav.nav-container a:hover::after {
   opacity: 1;
   transform: translate(0, -50%);
 }
 
 /* --- INSTAGRAM STORY TRACKER WRAPPER --- */
-.dragons-body nav.nav-container .story-tracker {
+.club-hockey-body nav.nav-container .story-tracker {
   width: 40%;               /* Explicitly stretch 40% of the viewport width */
   display: flex;
   flex-direction: row;

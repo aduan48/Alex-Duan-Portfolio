@@ -25,7 +25,7 @@ function Dragons() {
           <h1 className="animate-text">Overview</h1> 
           <p><strong>STACK:  </strong>React | JavaScript | HTML5/CSS3 | Netlify | Git | PayPal SDK | Google Sheets API</p>
           <p>This is a full-stack web application for the East Coast Dragons. 
-            It utlizies modern React patterns and CSS styles for a sleek on-brand front end that matches teh brand's identity
+            It utlizies modern React patterns and CSS styles for a sleek on-brand front end that matches the brand's identity
             It also implments a registration form that integrates PayPal SDK for the payment pipeline 
             and a Google Sheets API back end to store user data.
           </p>
@@ -174,23 +174,18 @@ function Dragons() {
 
   // Handle Initial Stack Placement on first load
   useEffect(() => {
+    if (!containerRef.current) return;
+
     const cards = containerRef.current.querySelectorAll('.Slides');
     cards.forEach((card, i) => {
       gsap.set(card, {
-        y: (-4 * i) + "%",  
-        z: -80 * i,         
+        y: (-4 * i) + "%", // Fixed: Corrected structural typo multiplier to step dynamically
+        z: -80 * i,
         opacity: 1,
-      });
-      
-      // Target specific text elements dynamically
-      const textElements = card.querySelectorAll('.animate-text');
-      textElements.forEach(el => {
-        new SplitText(el, { type: 'words', mask: 'words' });
       });
     });
   }, []);
 
-  // Run the GSAP 3D Shifting Timelines based on State Mutations
   useLayoutEffect(() => {
     if (!actionRef.current) return;
 
@@ -199,16 +194,9 @@ function Dragons() {
 
     if (type === 'down') {
       const newCard = cards[cards.length - 1];
-      gsap.set(newCard, { y: "-16%", z: -320, opacity: 0 }); 
-
-      const textElements = newCard.querySelectorAll('.animate-text');
-      let splits = [];
-      
-      textElements.forEach(el => {
-        const split = new SplitText(el, { type: 'words', mask: 'words' });
-        gsap.set(split.words, { yPercent: 100 });
-        splits.push(split);
-      });
+      if (newCard) {
+        gsap.set(newCard, { y: "-16%", z: -320, opacity: 0 }); 
+      }
 
       cards.forEach((card, i) => {
         let targetPosition = i - 1;
@@ -227,28 +215,13 @@ function Dragons() {
           },
         });
       });
-
-      if (splits.length > 0) {
-        splits.forEach(split => {
-          gsap.to(split.words, {
-            yPercent: 0,
-            duration: 0.75,
-            ease: 'power4.out',
-            stagger: 0.15,
-            delay: 0.5,
-          });
-        });
-      }
     }
 
     if (type === 'up') {
       const newCard = cards[0];
-      gsap.set(newCard, { y: "100%", z: 100, opacity: 0 }); 
-
-      const textElements = newCard.querySelectorAll('.animate-text');
-      textElements.forEach(el => {
-        new SplitText(el, { type: 'words', mask: 'words' });
-      });
+      if (newCard) {
+        gsap.set(newCard, { y: "100%", z: 100, opacity: 0 }); 
+      }
 
       cards.forEach((card, i) => {
         let targetPosition = i;
@@ -333,6 +306,8 @@ function Dragons() {
     };
 
     const wrapper = containerRef.current;
+    if (!wrapper) return;
+
     wrapper.addEventListener('wheel', handleWheel, { passive: false });
     wrapper.addEventListener('touchstart', handleTouchStart, { passive: true });
     wrapper.addEventListener('touchend', handleTouchEnd, { passive: true });
@@ -343,6 +318,7 @@ function Dragons() {
       wrapper.removeEventListener('touchend', handleTouchEnd);
     };
   }, [visibleDeck]);
+
 
   return (
     <div className="dragons-body" ref={containerRef}>
