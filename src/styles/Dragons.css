@@ -64,6 +64,11 @@
   margin-top: 20%;
 }
 
+#slide-0 .slide-inner-content h1{
+    letter-spacing: 0.01ch;
+}
+
+
 #slide-1 img{
   width: 102%;
 }
@@ -73,6 +78,10 @@
   line-height: 1.4;
   padding-bottom: 1.2em; 
   color: #d6d4d4;
+}
+
+#slide-2 .slide-inner-content{
+  margin-top: -5%;
 }
 
 #slide-2 .inspiration-block {
@@ -109,7 +118,7 @@
 
 
 #slide-3 .slide-inner-content{
-  margin-top: 20%;
+  margin-top: 17%;
 }
 
 #slide-5 img{

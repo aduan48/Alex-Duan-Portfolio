@@ -82,6 +82,12 @@ function Ephemeral() {
     gsap.set([imgPreviews, minimap], { autoAlpha: 0 });
     gsap.set(layoutText, { autoAlpha: 0, y: 20 });
     
+    // --- FIX: Apply the 'active' class on initial load ---
+    items.forEach((item) => {
+      item.classList.toggle('active', item.id === activeLayoutRef.current);
+    });
+    // -----------------------------------------------------
+    
     function enableLayout2Scroll() {
       document.body.classList.add('ephemeral-can-scroll');
 
@@ -251,7 +257,7 @@ function Ephemeral() {
     <div className="ephemeral-body">
       <nav ref={navRef}>
         <div className="nav-item back-btn">
-          <Link to="/work">
+          <Link to="/projects">
             <p>BACK</p>
           </Link>
         </div>

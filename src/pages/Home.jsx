@@ -34,7 +34,7 @@ function Home() {
       <FluidCanvas className = "gradient-canvas"/>
 
       <div className='home-logo'>
-        <Link to = "/work">
+        <Link to = "/projects">
           <h1 ref={titleRef}>ALEX DUAN</h1>
         </Link>
       </div>

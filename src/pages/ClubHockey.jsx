@@ -4,6 +4,11 @@ import '../styles/ClubHockey.css';
 import FluidCanvas from '../components/FluidCanvasBW';
 import { Link } from 'react-router-dom';
 import transition from '../transitionGallery';
+import landing from '../colby_website/homepage_demo.mp4'
+import schedule from '../colby_website/schedule_demo.mp4'
+import carousel from '../colby_website/carousel_demo.png'
+import mobile from '../colby_website/mobile_demo.mp4'
+import identity from '../colby_website/mule_identity.png'
 
 function ClubHockey() {
 
@@ -14,12 +19,8 @@ function ClubHockey() {
       content: (
         <div className="slide-inner-content">
           <h1>Overview</h1> 
-          <p><strong>STACK:  </strong>React | JavaScript | HTML5/CSS3 | Netlify | Git | PayPal SDK | Google Sheets API</p>
-          <p>This is a full-stack web application for the East Coast Dragons. 
-            It utilizes modern React patterns and CSS styles for a sleek on-brand front end that matches the brand's identity.
-            It also implements a registration form that integrates PayPal SDK for the payment pipeline 
-            and a Google Sheets API back end to store user data.
-          </p>
+          <p><strong>STACK:  </strong>React | JavaScript | HTML5/CSS3 | Netlify | Git | Three.js | WebGL</p>
+          <p>This full-stack web application, engineered for Colby Club Hockey, pairs modern React architecture with adaptive styling and 3d elements to deliver a highly responsive, on-brand digital presence. The platform features an automated serverless data pipeline, integrating Netlify Forms for serverless submission tracking alongside a custom React state engine that persistently backs up user inputs to local storage against accidental browser refreshes. Furthermore, the architecture leverages serverless backend functions to decouple raw schedule data from the client, parsing external JSON files to feed the frontend interactive rosters and game timelines dynamically.</p>
         </div>
       ),
     },
@@ -27,13 +28,104 @@ function ClubHockey() {
       id: 'slide-1', 
       content: (
         <div className="slide-inner-content">
-          <h1>Overview</h1> 
-          <p><strong>STACK:  </strong>React | JavaScript | HTML5/CSS3 | Netlify | Git | PayPal SDK | Google Sheets API</p>
-          <p>This is a full-stack web application for the East Coast Dragons. 
-            It utilizes modern React patterns and CSS styles for a sleek on-brand front end that matches the brand's identity.
-            It also implements a registration form that integrates PayPal SDK for the payment pipeline 
-            and a Google Sheets API back end to store user data.
+              <h1>Brand Identity</h1> 
+              <div className='brand-identity'>
+
+            <p>When designing the website for Colby Club Hockey, I drew direct inspiration from the team’s identity which pairs the iconic Colby Mule logo with a crisp white and deep blue color palette. This stark, clean aesthetic influenced me to build the site with a dominant white background to evoke the pristine surface of a hockey rink, using strategic blue highlights to mimic the sharp intensity of the logo itself. By mirroring these official colors, I ensured the digital space feels instantly recognizable, professional, and deeply rooted in the team's athletic tradition.
+            </p>
+          
+            <div className='identity-img'>
+              <img src = {identity} alt = ''/>
+            </div>
+            </div>
+        </div>
+      ),
+    },
+    { 
+      id: 'slide-2',
+      content: (
+        <div className="slide-inner-content">
+          <h1>Landing Page</h1> 
+          <p>This full-stack web application, engineered for Colby Club Hockey, pairs modern React architecture with adaptive styling to deliver a highly responsive, on-brand digital presence. The platform features an automated serverless data pipeline, integrating Netlify Forms for serverless submission tracking alongside a custom React state engine that persistently backs up user inputs to local storage against accidental browser refreshes. Furthermore, the architecture leverages serverless backend functions to decouple raw schedule data from the client, parsing external JSON files to feed the frontend interactive rosters and game timelines dynamically.</p>
+          <div className='slide-footer'>
+            <p> <strong>SCROLL NEXT FOR DEMO VIDEO</strong></p>
+          </div>
+        </div>
+      ),
+    },
+    { 
+      id: 'slide-3',  
+      content: (
+        <div className="slide-inner-content">
+          <video autoPlay loop muted playsInline className="background-video">
+            <source src={landing} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      ),
+    },
+    { 
+      id: 'slide-4',
+      content: (
+        <div className="slide-inner-content">
+          <h1>Schedule</h1> 
+          <p>This dynamic schedule engine bridges a state-driven React frontend with a Netlify serverless backend to deliver an interactive, data-decoupled match tracker. Instead of bundling heavy static data into the client build, a Netlify background function intercepts user dropdown selections, reads the requested timeline parameter, and serves targeted JSON payloads dynamically. On the frontend, a reactive pipeline handles data hydration, while a high-performance linear reduction pass calculates total games played, records, and win percentages on the fly. The user experience is rounded out by an athletic, context-aware design—including dynamic row highlights for wins and losses, localized home/away indicators, mobile-friendly overflow boundaries, and scroll-tracked parallax background effects that activate seamlessly as users explore the team's history.
+            A similar architecture is used for the roster as well.
           </p>
+           <div className='slide-footer'>
+            <p> <strong>SCROLL NEXT FOR DEMO VIDEO</strong></p>
+          </div>
+        </div>
+      ),
+    },
+    { 
+      id: 'slide-5',  
+      content: (
+        <div className="slide-inner-content">
+          <video autoPlay loop muted playsInline className="background-video">
+            <source src={schedule} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      ),
+    },
+    { 
+      id: 'slide-6',
+      content: (
+        <div className="slide-inner-content">
+          <h1>Carousel</h1> 
+          <p>This feature implements an immersive, interactive 3D photo carousel engineered with React Three Fiber and WebGL to showcase player highlights in a visually gripping format that breaks away from traditional flat image sliders. To capture the raw energy and momentum of the players in action, the design choice treats the media gallery like a cinematic stadium display: individual player textures are distributed across a calculated radial cylinder using trigonometric polar coordinates, while a frame-rate independent physics loop drives a continuous, smooth rotation. This spatial layout is enhanced by custom 3D lighting architecture—combining a centered, high-intensity beam with an optimized material texture—so that each action shot subtly glows and cuts through the dark environment like a dramatic camera flash, creating a high-octane spotlight effect.
+          </p>
+           <div className='slide-footer'>
+            <p> <strong>SCROLL NEXT FOR DEMO IMAGE</strong></p>
+          </div>
+        </div>
+      ),
+    },
+    { 
+      id: 'slide-7',  
+      content: (
+        <div className="slide-inner-content">
+          <img src = {carousel} alt = '' />
+        </div>
+      ),
+    },
+    {
+      id: 'slide-8',
+      content: (
+        <div className="slide-inner-content">
+          <div className='mobile-content'>
+            <div className='mobile-mov'>
+              <video autoPlay loop muted playsInline className="background-video">
+                <source src={mobile} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div className='mobile-text'>
+              <h1>Mobile UI/UX</h1>
+              <p>Recognizing that the vast majority of our user traffic originated from mobile devices, prioritizing a flawless responsive UX became a core focus of our design and development cycle. I engineered a highly adaptive interface that leverages fluid CSS layouts, media queries, and dynamic resizing to guarantee the structural view plane remains intact across varying screen sizes. To prevent complex spatial content—such as multi-column splits—from breaking, I implemented precision flexbox scaling, assigning dedicated percentage boundaries to preserve visual hierarchy. Furthermore, I overhauled the global navigation wrapper with responsive breakpoint listeners, cleanly compressing standard desktop navigational items into an interactive, animated hamburger menu on smaller screens to maximize layout real estate and retain intuitive usability.</p>
+            </div>
+          </div>
         </div>
       ),
     },
@@ -42,10 +134,17 @@ function ClubHockey() {
   const [visibleDeck, setVisibleDeck] = useState([
     { keyId: 0, slideIndex: 0},
     { keyId: 1, slideIndex: 1},
+    { keyId: 2, slideIndex: 2},
+    { keyId: 3, slideIndex: 3},
+    { keyId: 4, slideIndex: 4},
+    { keyId: 5, slideIndex: 5},
+    { keyId: 6, slideIndex: 6},
+    { keyId: 7, slideIndex: 7},
+    { keyId: 8, slideIndex: 8},
   ]);
 
   const containerRef = useRef(null);
-  const keyCounter = useRef(2);
+  const keyCounter = useRef(9);
   const actionRef = useRef(null); // track scroll up or down
 
   const isSliderAnimating = useRef(false);
@@ -210,7 +309,7 @@ function ClubHockey() {
     <div className="club-hockey-body" ref={containerRef}>
         <nav className='nav-container'>
           <div className="nav-item">
-            <Link to="/work">
+            <Link to="/projects">
               BACK
             </Link>
           </div>

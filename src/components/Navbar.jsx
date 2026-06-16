@@ -5,7 +5,7 @@ import '../styles/Navbar.css';
 function Navbar() {
   const [openLinks, setOpenLinks] = useState(true);
   const location = useLocation();
-  const isHidden = location.pathname === '/work/ephemeral' || location.pathname === '/work/colby'  || location.pathname === '/work/club-hockey'  || location.pathname === '/work/dragons';
+  const isHidden = location.pathname === '/projects/ephemeral' || location.pathname === '/projects/colby'  || location.pathname === '/projects/club-hockey'  || location.pathname === '/projects/dragons';
 
 
   const toggleNavbar = () => {
@@ -22,7 +22,7 @@ function Navbar() {
       <div className='center' id={openLinks ? "open" : "close"}>
         <Link to="/home"> HOME </Link>
         <Link to="/about"> ABOUT </Link>
-        <Link to="/work"> WORK </Link>
+        <Link to="/projects"> PROJECTS </Link>
         <Link to="/contact"> CONTACT
          </Link>
       </div>

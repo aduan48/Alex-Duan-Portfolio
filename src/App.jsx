@@ -8,7 +8,8 @@ import Work from './pages/Work'
 import Ephemeral from './pages/Ephemeral';
 import Colby from './pages/Colby';
 import ClubHockey from './pages/ClubHockey'
-import Dragons from './pages/Dragons'
+import Dragons from './pages/Dragons';
+import About from './pages/About';
 import { AnimatePresence } from 'framer-motion';
 
 // 2. Created a wrapper component to safely access useLocation
@@ -21,14 +22,14 @@ function AnimatedRoutes() {
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/contact" element={<Home />} />
-        <Route path="/about" element={<Home />} />
-        <Route path="/work" element={<Work />} />
+        <Route path="/contact" element={<About />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/projects" element={<Work />} />
         <Route path="/register" element={<Home />} />
-        <Route path="/work/ephemeral" element={<Ephemeral />} />
-        <Route path="/work/colby" element={<Colby />} />
-        <Route path="/work/club-hockey" element={<ClubHockey />} />
-        <Route path="/work/dragons" element={<Dragons />} />
+        <Route path="/projects/ephemeral" element={<Ephemeral />} />
+        <Route path="/projects/colby" element={<Colby />} />
+        <Route path="/projects/club-hockey" element={<ClubHockey />} />
+        <Route path="/projects/dragons" element={<Dragons />} />
       </Routes>
     </AnimatePresence>
   );

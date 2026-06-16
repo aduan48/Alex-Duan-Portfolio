@@ -36,7 +36,7 @@ function Dragons() {
       id: 'slide-1', 
       content: (
         <div className="slide-inner-content">
-          <h1 >BRAND IDENTITY</h1> 
+          <h1 >Brand Identity</h1> 
           <img src = {identity} alt = '' />
           <p>The Dragons brand identity balances grassroots athletic grit with a mission-driven call for inclusivity, representation, and community. 
             The brand utilizes a high-contrast, bold color palette consisting of crisp white, a deep crimson red, and a sharp black. 
@@ -75,7 +75,7 @@ function Dragons() {
       content: (
         <div className="slide-inner-content">
           <h1>Landing Page</h1>
-          <p > The landing page features a dynamic looping video background. The video is an edit made by Alger Productions of our players in action during a tournament. Overlaying the video is our red white Dragons logo. Since the main purpose of this website is to register for a tournament, I included a register button that links to the register page on the navbar and on the landing page.
+          <p > The landing page features an interactive custom 3D puck model designed to create a dynamic first impression. I used Blender to apply the Colby Mule logo onto the puck and gave it a metallic material for a sleek, realistic finish. The model was then integrated into the site with Three.js and set to rotate continuously, adding motion and visual interest to the homepage. The club name is overlaid on top of the scene to establish clear branding. Since the site is mainly used for team updates and live stream access, I also added a prominent homepage button that links directly to the club’s YouTube channel.
           </p>
           <div className='slide-footer'>
           <p> <strong>SCROLL NEXT FOR DEMO VIDEO</strong></p>
@@ -343,7 +343,7 @@ function Dragons() {
     <div className="dragons-body" ref={containerRef}>
       <nav className='nav-container'>
         <div className="nav-item">
-          <Link to="/work">
+          <Link to="/projects">
             BACK
           </Link>
         </div>

@@ -61,7 +61,95 @@
 
 
 #slide-0 .slide-inner-content{
-  margin-top: 20%;
+  margin-top: 15%;
+}
+
+#slide-0 .slide-inner-content h1{
+    letter-spacing: 0.01ch;
+}
+
+#slide-1 .slide-inner-content{
+    margin-top: 12%;
+}
+
+#slide-1 .brand-identity{
+  display: flex;
+  flex-direction: column; /* Centers items vertically relative to each other */
+  justify-content: center;
+      /* Increased gap slightly for a cleaner layout split */
+  width: 100%;
+  margin-top: .7em;
+}
+
+
+#slide-1 .identity-img img{
+    width: 50%;
+}
+
+#slide-2 .slide-inner-content{
+    margin-top: 30%;
+}
+
+#slide-2 .slide-inner-content h1{
+    margin-top: 15%;
+}
+
+#slide-4 .slide-inner-content{
+    margin-top: 15%;
+}
+
+#slide-6 .slide-inner-content{
+    margin-top: 15%;
+}
+
+
+#slide-7 img {
+  position: absolute;
+  width: 90%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#slide-8 .mobile-content {
+  display: flex;
+  flex-direction: row; 
+  align-items: center; /* Centers items vertically relative to each other */
+  justify-content: space-between;
+  gap: 30px;           /* Increased gap slightly for a cleaner layout split */
+  width: 100%;
+  margin-top: .7em;
+}
+
+/* Video Column Container */
+#slide-8 .mobile-content .mobile-mov {
+  flex: 0 0 30%;       /* Do not grow, do not shrink, fix precisely at 30% width */
+  max-width: 30%;
+  width: 100%;
+}
+
+/* Force the video within the column to behave like a standard block element */
+#slide-8 .mobile-content .mobile-mov video {
+  position: relative;  /* Removes absolute positioning if inherited from general slides styles */
+  top: 0;
+  left: 0;
+  transform: none;     /* Removes the translate reset from your general video rules */
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* Text Column Container */
+#slide-8 .mobile-content .mobile-text {
+  flex: 0 0 70%;       /* Fixed precisely at 70% width */
+  max-width: 70%;
+  text-align: left;    /* Ensures copy remains readable in a wider layout zone */
+}
+
+/* Strip margin overrides if paragraphs live inside the text side container */
+#slide-8 .mobile-content .mobile-text p {
+  margin: 0;
 }
 
 /* Ensure background videos scale correctly to fill the frame */
@@ -224,4 +312,12 @@
   align-items: center;
   z-index: 999;
   top: 91%;
+}
+
+.slide-inner-content .slide-footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem; /* Adds some separation from the content above */
 }

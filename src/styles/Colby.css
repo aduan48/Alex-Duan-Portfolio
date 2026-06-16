@@ -187,3 +187,26 @@ body.colby-page.colby-can-scroll .img-previews {
   padding-top: 4em;
   background: transparent; /* Allows the fixed Fluid Canvas in the background to remain visible */
 }
+
+body.colby-page nav .nav-item p.active {
+  opacity: 1;
+}
+
+/* Create the white line underneath the active item */
+body.colby-page nav .nav-item p.active {
+  margin-top: 2px;
+  border-bottom: 2px solid #000000;
+}
+
+/* CRITICAL FIX: Since your original CSS uses ::after for the "]" hover bracket effect, 
+   we need to make sure the bracket doesn't conflict with our new active underline.
+   This overrides the hover bracket *only* when the item is active.
+*/
+body.colby-page nav .nav-item p.active::before,
+body.colby-page nav .nav-item p.active::after,
+body.colby-page nav .nav-item p.active:hover::before,
+body.colby-page nav .nav-item p.active:hover::after {
+  content: "" !important;
+  opacity: 0 !important;
+  display: none !important;
+}

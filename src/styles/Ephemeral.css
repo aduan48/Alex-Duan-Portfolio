@@ -187,3 +187,28 @@ body.ephemeral-page.ephemeral-can-scroll .img-previews {
   padding-top: 4em;
   background: transparent; /* Allows the fixed Fluid Canvas in the background to remain visible */
 }
+
+/* Ensure the active text stays fully visible */
+body.ephemeral-page nav .nav-item p.active {
+  opacity: 1;
+}
+
+/* Create the white line underneath the active item */
+body.ephemeral-page nav .nav-item p.active {
+  border-bottom: 2px solid #ffffff;
+  margin-top: 2px;
+}
+
+/* CRITICAL FIX: Since your original CSS uses ::after for the "]" hover bracket effect, 
+   we need to make sure the bracket doesn't conflict with our new active underline.
+   This overrides the hover bracket *only* when the item is active.
+*/
+body.ephemeral-page nav .nav-item p.active::before,
+body.ephemeral-page nav .nav-item p.active::after,
+body.ephemeral-page nav .nav-item p.active:hover::before,
+body.ephemeral-page nav .nav-item p.active:hover::after {
+  content: "" !important;
+  opacity: 0 !important;
+  display: none !important;
+}
+

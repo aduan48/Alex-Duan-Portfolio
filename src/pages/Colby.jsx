@@ -90,8 +90,14 @@ function Colby() {
     gsap.set([imgPreviews, minimap], { autoAlpha: 0 });
     gsap.set(layoutText, { autoAlpha: 0, y: 20 });
     
+    // --- FIX: Apply the 'active' class on initial load ---
+    items.forEach((item) => {
+      item.classList.toggle('active', item.id === activeLayoutRef.current);
+    });
+    // -----------------------------------------------------
+    
     function enableLayout2Scroll() {
-      document.body.classList.add('colby-can-scroll');
+      document.body.classList.add('ephemeral-can-scroll');
 
       requestAnimationFrame(() => {
         lenis.scrollTo(0, { immediate: true });
@@ -109,7 +115,7 @@ function Colby() {
       // 3. Fallback native scroll window reset
       window.scrollTo(0, 0);
       
-      document.body.classList.remove('colby-can-scroll');
+      document.body.classList.remove('ephemeral-can-scroll');
     }
 
     // Force initialization to start disabled (since initial layout is 1)
@@ -259,7 +265,7 @@ function Colby() {
     <div className="colby-body">
       <nav ref={navRef}>
         <div className="nav-item">
-          <Link to="/work">
+          <Link to="/projects">
             <p>BACK</p>
           </Link>
         </div>
@@ -304,7 +310,7 @@ function Colby() {
         brand elements like the Mule mascot silhouette, the stylized "C" crest, and distinct 
         opponent iconography, anchors the audience directly into a fierce, cinematic athletic 
         universe.
-        </p>
+        </p> 
   </div>
       <div className="gallery-container">
         <div className="gallery layout-1-gallery" ref={galleryRef}>
