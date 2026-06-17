@@ -43,7 +43,8 @@
   align-items: center;
   text-align: center;
   
-  background: rgba(52, 52, 52, 0.507);            
+  background: rgba(52, 52, 52, 0.507);       
+  opacity: .5;     
   backdrop-filter: blur(20px);                
   -webkit-backdrop-filter: blur(20px); 
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
