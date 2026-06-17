@@ -97,7 +97,7 @@ function Colby() {
     // -----------------------------------------------------
     
     function enableLayout2Scroll() {
-      document.body.classList.add('ephemeral-can-scroll');
+      document.body.classList.add('colby-can-scroll');
 
       requestAnimationFrame(() => {
         lenis.scrollTo(0, { immediate: true });
@@ -115,7 +115,7 @@ function Colby() {
       // 3. Fallback native scroll window reset
       window.scrollTo(0, 0);
       
-      document.body.classList.remove('ephemeral-can-scroll');
+      document.body.classList.remove('colby-can-scroll');
     }
 
     // Force initialization to start disabled (since initial layout is 1)

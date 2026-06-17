@@ -1,15 +1,27 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import '../styles/Navbar.css';
 
 function Navbar() {
   const [openLinks, setOpenLinks] = useState(true);
   const location = useLocation();
-  const isHidden = location.pathname === '/projects/ephemeral' || location.pathname === '/projects/colby'  || location.pathname === '/projects/club-hockey'  || location.pathname === '/projects/dragons';
-
+  const navigate = useNavigate();
+  const isHidden = location.pathname === '/projects/ephemeral' || location.pathname === '/projects/colby' || location.pathname === '/projects/club-hockey' || location.pathname === '/projects/dragons';
 
   const toggleNavbar = () => {
     setOpenLinks(!openLinks);
+  };
+
+  // --- SCROLL TO CONTACT LOGIC ---
+  const handleContactClick = (e) => {
+    e.preventDefault(); 
+
+    if (location.pathname === '/about') {
+      const contactSection = document.getElementById('contact-section');
+      contactSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      navigate('/about', { state: { scrollToContact: true } });
+    }
   };
 
   return (
@@ -18,18 +30,17 @@ function Navbar() {
         <Link to="/home"> PORTFOLIO </Link>
       </div>
       
-      {/* Slides rightward to sandwich when closed */}
       <div className='center' id={openLinks ? "open" : "close"}>
         <Link to="/home"> HOME </Link>
+        
+        {/* CHANGED: Swapped <Link> to an <a> tag with the custom click handler */}
         <Link to="/about"> ABOUT </Link>
+        
         <Link to="/projects"> PROJECTS </Link>
-        <Link to="/contact"> CONTACT
-         </Link>
+        <a href="#contact" onClick={handleContactClick}> CONTACT </a>
       </div>
       
       <div className='rightSide'> 
-
-        
         <button onClick={toggleNavbar} className="toggle-btn">
           {openLinks ? '{HIDE}' : '{EXPAND}'}
         </button>

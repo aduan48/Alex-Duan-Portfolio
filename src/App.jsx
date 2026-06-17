@@ -11,6 +11,7 @@ import ClubHockey from './pages/ClubHockey'
 import Dragons from './pages/Dragons';
 import About from './pages/About';
 import { AnimatePresence } from 'framer-motion';
+import ScrollToTop from './ScrollToTop';
 
 // 2. Created a wrapper component to safely access useLocation
 function AnimatedRoutes() {
@@ -39,6 +40,7 @@ function App() {
   return (
     <div className="App">
       <Router>
+        <ScrollToTop />
         <Navbar />
         {/* Render the wrapper inside the Router context */}
         <AnimatedRoutes />

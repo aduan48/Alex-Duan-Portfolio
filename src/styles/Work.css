@@ -22,7 +22,7 @@
 /* --- Your existing CSS (with a slight tweak) --- */
 
 .Work {
-  padding-top: 80px; /* Slightly more breathing room from navbar */
+  padding-top: 100px; /* Slightly more breathing room from navbar */
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -69,7 +69,7 @@
   padding-right: 12px;
   border-radius: 12px;
 
-      background: rgba(209, 209, 209, 0.4);            
+  background: rgba(135, 135, 135, 0.15);         
   backdrop-filter: blur(20px);                
   -webkit-backdrop-filter: blur(20px); 
 }
@@ -89,9 +89,12 @@
 }
 
 .Work h1 {
-  letter-spacing: 2px;
-  margin-bottom: 60px; 
-  color: white; 
+  color: white;
+  margin-top: 0;           /* Prevents browser-default margins from altering the layout calculation */
+  margin-bottom: 20px;
+  text-align: center;    
+  line-height: 1;
+  letter-spacing: 2px;  
 }
 
 .Work h2{
