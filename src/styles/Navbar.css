@@ -10,6 +10,15 @@
   backdrop-filter: blur(20px);                
   -webkit-backdrop-filter: blur(20px); 
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+
+    backface-visibility: hidden;
+  will-change: transform, opacity;
+  
+  /* --- THE PRODUCTION BLUR FIXES --- */
+  /* 1. Tells the browser's layout engine to group this element's paint context */
+  isolation: isolate; 
+  
+
   
   position: fixed;
   top: 0;

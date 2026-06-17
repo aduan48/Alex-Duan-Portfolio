@@ -37,6 +37,20 @@ body.ephemeral-page nav {
   backdrop-filter: blur(20px);                
   -webkit-backdrop-filter: blur(20px); 
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+  
+  /* --- THE PRODUCTION BLUR FIXES --- */
+  /* 1. Tells the browser's layout engine to group this element's paint context */
+  isolation: isolate; 
+  
+  /* 2. Overrides absolute 3D rendering isolation by flattening the layer context */
+  transform-style: flat !important; 
+  
+  /* 3. Forces Safari/Webkit to respect the backdrop filter bounds */
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
 }
 
 body.ephemeral-page nav .nav-item {
