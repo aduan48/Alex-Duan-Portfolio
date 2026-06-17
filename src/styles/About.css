@@ -45,7 +45,7 @@
 .info {
   padding: 20px 24px;      /* Balanced padding all around */
   border-radius: 12px;
-  background: rgba(135, 135, 135, 0.15);  /* Softened background transparency for optimal contrast */
+  background: rgba(202, 202, 202, 0.3);   /* Softened background transparency for optimal contrast */
   backdrop-filter: blur(20px);                
   -webkit-backdrop-filter: blur(20px); 
 }

@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import Navbar from './components/Navbar'
-// 1. Added useLocation to track URL changes
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom'; 
 import './App.css'
 import Home from './pages/Home'
@@ -13,13 +12,11 @@ import About from './pages/About';
 import { AnimatePresence } from 'framer-motion';
 import ScrollToTop from './ScrollToTop';
 
-// 2. Created a wrapper component to safely access useLocation
 function AnimatedRoutes() {
   const location = useLocation();
 
   return (
     <AnimatePresence mode="wait">
-      {/* 3. Pass location and key to Routes */}
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
@@ -39,10 +36,17 @@ function AnimatedRoutes() {
 function App() {
   return (
     <div className="App">
+      {/* NEW: Desktop Requirement Interceptor Overlay Overlay */}
+      <div className="desktop-enforcer-overlay">
+        <div className="enforcer-content">
+          <h1>{'{ ALEX DUAN PORTFOLIO }'}</h1>
+          <p>This experience requires desktop viewports. Please switch to a larger display or wider layout dimensions to continue.</p>
+        </div>
+      </div>
+
       <Router>
         <ScrollToTop />
         <Navbar />
-        {/* Render the wrapper inside the Router context */}
         <AnimatedRoutes />
       </Router>
     </div>
