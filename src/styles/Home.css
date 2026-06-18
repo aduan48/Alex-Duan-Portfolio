@@ -11,7 +11,7 @@ img {
   object-fit: cover;
 }
 
-p {
+.home-footer p{
   color: #fff;
   font-size: 10px;
   font-weight: 450;
@@ -44,6 +44,14 @@ p {
   overflow: hidden;
   padding: 20px 0;
   text-align: center;
+}
+
+.home-logo p{
+  margin-top: 20px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 450;
+
 }
 
 .home-logo h1 {

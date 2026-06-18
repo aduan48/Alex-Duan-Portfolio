@@ -14,9 +14,9 @@
 
 .about-content {
   width: 100%;
-  max-width: 1100px;        /* Prevents lines from stretching too wide to read comfortably */
-  padding-left: 5%;        /* Gives safe breathing room on smaller screens/mobile */
-  padding-right: 5%;
+  max-width: 1500px;        /* Prevents lines from stretching too wide to read comfortably */
+  padding-left: 15%;        /* Gives safe breathing room on smaller screens/mobile */
+  padding-right: 15%;
   box-sizing: border-box;
   z-index: 1;            /* Ensures content sits firmly in front of the canvas wrapper */
 }

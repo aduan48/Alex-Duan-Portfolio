@@ -29,6 +29,10 @@ function Dragons() {
             and a Google Sheets API back end to store user data.
           </p>
 
+          <div className='slide-footer'>
+             <p> <strong>SCROLL UP FOR NEXT SLIDE</strong></p>
+          </div>
+
         </div>
       ),
     },

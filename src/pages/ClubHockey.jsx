@@ -21,7 +21,17 @@ function ClubHockey() {
           <h1>Overview</h1> 
           <p><strong>STACK:  </strong>React | JavaScript | HTML5/CSS3 | Netlify | Git | Three.js | WebGL</p>
           <p>This full-stack web application, engineered for Colby Club Hockey, pairs modern React architecture with adaptive styling and 3d elements to deliver a highly responsive, on-brand digital presence. The platform features an automated serverless data pipeline, integrating Netlify Forms for serverless submission tracking alongside a custom React state engine that persistently backs up user inputs to local storage against accidental browser refreshes. Furthermore, the architecture leverages serverless backend functions to decouple raw schedule data from the client, parsing external JSON files to feed the frontend interactive rosters and game timelines dynamically.</p>
+
+          <div className='slide-footer'>
+             <p> <strong>SCROLL UP FOR NEXT SLIDE</strong></p>
+          </div>
+
+       
+
         </div>
+
+        
+
       ),
     },
     { 

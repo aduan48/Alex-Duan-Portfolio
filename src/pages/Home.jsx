@@ -37,6 +37,7 @@ function Home() {
         <Link to = "/projects">
           <h1 ref={titleRef}>ALEX DUAN</h1>
         </Link>
+        <p>^ CLICK TO VIEW WORK ^</p>
       </div>
       
       <div className='home-footer'>
