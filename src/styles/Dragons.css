@@ -92,6 +92,9 @@
   color: #d6d4d4;
 }
 
+#slide-2 .slide-inner-content{
+  top:0%;
+}
 
 #slide-2 .inspiration-block {
   display: flex;
