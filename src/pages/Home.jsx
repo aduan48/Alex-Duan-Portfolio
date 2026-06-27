@@ -39,6 +39,8 @@ function Home() {
         </Link>
         <p>^ CLICK TO VIEW WORK ^</p>
       </div>
+
+      
       
       <div className='home-footer'>
         <p>CREATED IN 2026</p>

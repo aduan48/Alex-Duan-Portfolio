@@ -103,7 +103,7 @@ function Dragons() {
       content: (
         <div className="slide-inner-content">
           <h1>Register</h1>
-          <p>This tournament registration system connects a custom React frontend with a secure serverless backend to create a smooth, automated user experience. Players move through a multi-step registration wizard that saves progress locally, securely handles PayPal payments, and instantly triggers a backend workflow that saves the info on a Google Sheet and sends a confirmation email. Serverless functions act as a protected API layer, keeping Google Sheets endpoints, transaction logic, and automation details hidden from the client. The system dynamically manages pricing, logs registrations, and sends confirmation emails automatically, all without manual maintenance or separate server hosting costs.
+          <p>This tournament registration system connects a custom React frontend with a secure serverless backend to create a smooth, automated user experience. Players move through a multi-step registration wizard that saves progress locally then triggers a backend workflow that securely handles PayPal payments and saves the info on a Google Sheet and sends a confirmation email. Serverless functions act as a protected API layer, keeping Google Sheets endpoints, transaction logic, and automation details hidden from the client. The system dynamically manages pricing, logs registrations, and sends confirmation emails automatically, all without manual maintenance or separate server hosting costs.
           </p>
           <img src = {flowchart} alt = ''/>
           <div className='slide-footer'>
