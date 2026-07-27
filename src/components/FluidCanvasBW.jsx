@@ -13,7 +13,7 @@ const vertexShader = `
 const fluidShader = `
   uniform float iTime;
   uniform vec2 iResolution;
-  uniform vec4 iMouse;
+  uniform vec4 iMouse; 
   uniform int iFrame;
   uniform sampler2D iPreviousFrame;
   float uBrushSize;

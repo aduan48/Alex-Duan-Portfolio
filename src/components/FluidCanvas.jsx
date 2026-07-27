@@ -190,8 +190,8 @@ export default function FluidCanvas() {
     const container = canvasContainerRef.current;
     if (!container) return;
 
-    let width = window.innerWidth;
-    let height = window.innerHeight;
+    let width = container.clientWidth || window.innerWidth;
+  let height = container.clientHeight || window.innerHeight;
 
     const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
     const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -321,8 +321,8 @@ export default function FluidCanvas() {
     animate();
 
     const handleResize = () => {
-      width = window.innerWidth;
-      height = window.innerHeight;
+      width = container.clientWidth || window.innerWidth;
+      height = container.clientHeight || window.innerHeight;
 
       renderer.setSize(width, height);
       fluidMaterial.uniforms.iResolution.value.set(width, height);

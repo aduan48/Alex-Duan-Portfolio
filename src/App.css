@@ -66,18 +66,3 @@
   color: #666666;
 }
 
-/* --- RESPONSIVE TRIGGER ARCHITECTURE --- */
-
-/* Trigger if the device is narrower than typical desktop thresholds (1024px) 
-   OR if the aspect ratio shifts into tall/portrait configurations */
-@media screen and (max-width: 950px), screen and (orientation: portrait) {
-  .desktop-enforcer-overlay {
-    display: flex;
-  }
-  
-  /* Disable body scroll while overlay lock runs active */
-  body {
-    overflow: hidden !important;
-    height: 100vh !important;
-  }
-}

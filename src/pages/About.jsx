@@ -29,24 +29,20 @@ function About() {
          <div className='about-content'>
             <div className='about-text'>
                 <h1>ABOUT ME</h1> 
-                <div className='info'>
+               <div className='info'>
                   <p>
-                    I am a builder who explores the intersection of logic, design, and human connection. Currently pursuing Math and Computer Science at Colby College, my goal is to figure out how software and design can unite to solve real-world problems for real people.
-
+                    I’m Alex Duan, a Math and Computer Science student at Colby College specializing in custom web development and visual design for sports organizations. I bridge the gap between technical infrastructure and high-impact design so athletic programs can present a professional face to parents, recruits, and sponsors.
                   </p> 
                   <p>
-                    My path toward product management started with the East Coast Dragons. Navigating the realm of starting a hockey tournament business from the ground up, I had to build both the program’s technical infrastructure and its brand identity from scratch. I engineered our full-stack web applications and streamlined our user registration pipelines while simultaneously crafting the visual assets and cross-channel marketing strategies that scaled our community to over 200+ athletes. That experience taught me what it truly means to own a product lifecycle: balancing strict technical constraints with a cohesive, engaging user experience.
-
+                    My work in sports development began with co-founding the <strong>East Coast Dragons</strong>, a hockey tournament business. I built our web applications and streamlined registration pipelines from scratch while crafting the visual marketing that scaled our community to over 200+ athletes. I learned firsthand what team directors actually need: tools that save administrative time and a web presence that inspires trust.
                   </p>  
                   <p>
-                    Since then, I’ve expanded on this duality by working with Colby Men’s Soccer and Colby Club Hockey to architect their digital brand presences. Whether I am writing clean React code to build interactive interfaces or designing cinematic visual identities that elevate a team's community presence, I treat brand identity and code as two sides of the same coin. To me, a product's frontend architecture and its visual storytelling must work in perfect harmony to build trust and engagement.
-
+                    Since then, I’ve partnered with programs like <strong>Colby Men’s Soccer</strong> and <strong>Colby Club Hockey</strong> to elevate their digital identities. From custom interactive interfaces to crisp mobile layouts, I treat brand design and web engineering as two sides of the same coin.
                   </p>  
                   <p>
-                    Ultimately, my goal isn't just to build standalone products, but to build communities. I want to produce digital spaces where people feel seen, connected, and empowered. In my career, I hope to use my design and engineering skills to create technology that brings people together.
-
+                    Whether you run a youth league, a competitive travel club, or a sports tournament, I build fast, tailored websites that simplify operations and make your organization stand out.
                   </p>      
-                </div>       
+                </div>   
             </div>
           <div className='contact-content' id='contact-section'>
             <h1>CONTACT ME</h1> 

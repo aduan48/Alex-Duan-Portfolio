@@ -1,99 +1,8 @@
-.Home{
-    position: relative;
-  width: 100vw;
-  height: 100svh;
-  overflow: hidden;
-}
-
-img {
-  width: 50%;
-  height: auto;
-  object-fit: cover;
-}
-
-.home-footer p{
-  color: #fff;
-  font-size: 10px;
-  font-weight: 450;
-}
-
-
-.home-footer {
-  position: absolute;
-  left: 0;
-  width: 100vw;
-  padding: 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 2;
-  top: 91%;
-}
-
-
-
-
-.home-logo {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  z-index: 2;
-
-  overflow: hidden;
-  padding: 20px 0;
-  text-align: center;
-}
-
-.home-logo p{
-  margin-top: 20px;
-  color: #fff;
-  font-size: 16px;
-  font-weight: 450;
-
-}
-
-.home-logo h1 {
-  color: #fff !important; 
-  font-size: 10em;
-  margin: 0;            
-  line-height: 1;       
-  display: inline-block;
+.Home {
   position: relative;
-  cursor: pointer;
-  
-  letter-spacing: 0em;
-  margin-right: 0em;
-  
-  /* Smooth transitions for the core text */
-
-  transition: letter-spacing 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
-              text-shadow 0.4s ease,
-              transform 0.4s ease;
-}
-
-/* The Animated Accent Line */
-.home-logo h1::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 50%;
-  width: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #b258a6, #66d1fe); /* Cool cyberpunk gradient */
-  transform: translateX(-50%);
-  transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-/* Hover States */
-.home-logo h1:hover {
-  letter-spacing: 0.03em; /* Elegant breathing room effect */
-  margin-right: -0.03em;
-}
-
-.home-logo h1:hover::after {
-  width: 102%; /* Line expands outwards from the center */
+  overflow: hidden;
+  color: #ffffff;
+  background-color: #0a0a0c; /* Clean dark background for the rest of the page */
 }
 
 .gradient-canvas {
@@ -102,6 +11,258 @@ img {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
+  z-index: 0;
+  pointer-events: none;
 }
 
+/* ==========================================================================
+   HERO SECTION
+   ========================================================================== */
+
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2; /* Keeps hero text above canvas and fade gradient */
+  max-width: 850px;
+  text-align: center;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.hero-tagline {
+  font-size: 0.85rem;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #a1a1aa;
+  display: block;
+  margin-bottom: 1.25rem;
+  font-weight: 600;
+}
+
+.hero-content h1 {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 1.1;
+  margin: 0 0 1.5rem 0;
+  color: #ffffff;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.hero-subtext {
+  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  line-height: 1.6;
+  color: #d4d4d8;
+  margin: 0 auto 2.5rem auto;
+  max-width: 680px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1.25rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* ==========================================================================
+   BUTTONS
+   ========================================================================== */
+
+.btn-primary,
+.btn-secondary {
+  padding: 0.9rem 1.8rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1),
+              background-color 0.25s ease,
+              border-color 0.25s ease,
+              box-shadow 0.25s ease;
+}
+
+.btn-primary {
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #ffffff;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15);
+}
+
+.btn-secondary {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+}
+
+.btn-secondary:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-3px);
+}
+
+/* ==========================================================================
+   FEATURED PROJECTS SECTION
+   ========================================================================== */
+
+.non-hero{
+  position: relative;
+  z-index: 2;
+  background-color: #ffffff;
+}
+
+.featured-section {
+  max-width: 100%;
+  margin: 0 10%;
+  padding: 6rem 2rem;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+
+}
+
+
+.value-banner {.hero-content {
+  position: relative;
+  z-index: 2; /* Keeps hero text above canvas and fade gradient */
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+  padding: 2rem;
+}
+  position: relative;
+  z-index: 2;
+  background-color: #0a0a0c; /* Guarantees a solid background */
+}
+
+.featured-section h2 {
+  font-size: 2rem;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+  color: #a1a1aa;
+  font-size: 1.1rem;
+  margin-bottom: 3.5rem;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  text-align: left;
+}
+
+.project-card {
+  background: rgba(20, 20, 25, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2.25rem;
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.project-tag {
+  font-size: 0.75rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #66d1fe;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.project-card h3 {
+  font-size: 1.5rem;
+  margin: 0 0 1rem 0;
+  color: #ffffff;
+}
+
+.project-card p {
+  color: #a1a1aa;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1.75rem;
+}
+
+.project-tech {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.project-tech span {
+  font-size: 0.75rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #e4e4e7;
+  padding: 0.3rem 0.75rem;
+  border-radius: 20px;
+}
+
+/* ==========================================================================
+   VALUE PROP BANNER
+   ========================================================================== */
+
+.end-block{
+  padding-bottom: 10em;
+}
+
+.value-banner {
+  max-width: 100%;
+  margin: 0 12%;
+  padding: 4rem 2rem;
+  text-align: center;
+  background: rgba(203, 203, 203, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
+  position: relative;
+  z-index: 2;
+  backdrop-filter: blur(10px);
+}
+
+.value-banner h2 {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  margin-bottom: 1rem;
+}
+
+.value-banner p {
+  color: #d4d4d8;
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto 2.5rem auto;
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   GENERIC / LEGACY HELPERS
+   ========================================================================== */
+
+img {
+  width: 50%;
+  height: auto;
+  object-fit: cover;
+}

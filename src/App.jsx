@@ -36,13 +36,7 @@ function AnimatedRoutes() {
 function App() {
   return (
     <div className="App">
-      {/* NEW: Desktop Requirement Interceptor Overlay Overlay */}
-      <div className="desktop-enforcer-overlay">
-        <div className="enforcer-content">
-          <h1>{'{ ALEX DUAN PORTFOLIO }'}</h1>
-          <p>This experience requires desktop viewports. Please switch to a larger display or wider layout dimensions to continue.</p>
-        </div>
-      </div>
+
 
       <Router>
         <ScrollToTop />
