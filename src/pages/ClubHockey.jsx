@@ -320,7 +320,7 @@ function ClubHockey() {
         <nav className='nav-container'>
           <div className="nav-item">
             <Link to="/projects">
-              BACK
+             MORE PROJECTS
             </Link>
           </div>
   

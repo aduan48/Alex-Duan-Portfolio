@@ -258,7 +258,7 @@ function Ephemeral() {
       <nav ref={navRef}>
         <div className="nav-item back-btn">
           <Link to="/projects">
-            <p>BACK</p>
+            <p>MORE PROJECTS</p>
           </Link>
         </div>
 

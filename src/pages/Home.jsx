@@ -51,7 +51,7 @@ function Home() {
           <div className='hero-actions'>
             <a href='#featured-work' className='btn-primary'>View Featured Projects</a>
             <Link to='/about' state={{ scrollToContact: true }} className='btn-secondary'>
-              Get a Free Quote
+              Contact Me
             </Link>
           </div>
         </div>
@@ -60,47 +60,55 @@ function Home() {
       {/* FEATURED WORK SHOWCASE */}
       <div className='non-hero'>
       <section id='featured-work' className='featured-section'>
-        <h2>FEATURED SPORTS PROJECTS</h2>
-        <p className='section-subtitle'>Custom digital presences engineered for growth and ease of use.</p>
+        <h2 className='featured-work-title'>FEATURED SPORTS PROJECTS</h2>
 
-        <div className='project-grid'>
+
+
+        <div className='project-grid' to = '/projects/dragons'>
           {/* Card 1: East Coast Dragons */}
-          <div className='project-card'>
-            <div className='project-tag'>Tournament & Business Platform</div>
-            <h3>East Coast Dragons</h3>
-            <p>Full-stack web app and brand identity built for a hockey tournament business. Streamlined registration pipelines to scale community to 200+ athletes.</p>
-            <div className='project-tech'>
-              <span>React</span>
-              <span>Registration Pipeline</span>
-              <span>Brand Strategy</span>
+          <Link to="/projects/dragons" style={{ textDecoration: 'none', color: 'inherit' }}> 
+            <div className='project-card'>
+              <div className='project-tag'>Integrated Platform</div>
+              <h3>East Coast Dragons</h3>
+              <p>Full-stack web app and brand identity built for a hockey tournament business. Streamlined registration pipelines to scale community to 200+ athletes.</p>
+              <div className='project-tech'>
+                <span>React</span>
+                <span>Registration Pipeline</span>
+                <span>Brand Strategy</span>
+              </div>
             </div>
-          </div>
+          </Link>
 
-          {/* Card 2: Colby Men's Soccer */}
-          <div className='project-card'>
-            <div className='project-tag'>Digital Brand</div>
-            <h3>Colby Men's Soccer</h3>
-            <p>Architected a high-energy digital brand presence and interactive frontend to engage fans, recruit athletes, and keep parents updated.</p>
-            <div className='project-tech'>
-              <span>UI/UX Design</span>
-              <span>Frontend Development</span>
-              <span>Media Strategy</span>
+          <Link to="/projects/colby" style={{ textDecoration: 'none', color: 'inherit' }}> 
+            {/* Card 2: Colby Men's Soccer */}
+            <div className='project-card'>
+              <div className='project-tag'>Digital Brand</div>
+              <h3>Colby Men's Soccer</h3>
+              <p>Architected a high-energy digital brand presence and interactive frontend to engage fans, recruit athletes, and keep parents updated.</p>
+              <div className='project-tech'>
+                <span>UI/UX Design</span>
+                <span>Frontend Development</span>
+                <span>Media Strategy</span>
+              </div>
             </div>
-          </div>
+          </Link>
 
           {/* Card 3: Colby Club Hockey */}
-          <div className='project-card'>
-            <div className='project-tag'>Club Operations</div>
-            <h3>Colby Club Hockey</h3>
-            <p>Modernized the program’s web presence with clean layout architecture, simplifying schedule tracking and roster management.</p>
-            <div className='project-tech'>
-              <span>React</span>
-              <span>Responsive Design</span>
-              <span>Branding</span>
+          <Link to="/projects/club-hockey" style={{ textDecoration: 'none', color: 'inherit' }}> 
+            <div className='project-card'>
+              <div className='project-tag'>Club Operations</div>
+              <h3>Colby Club Hockey</h3>
+              <p>Modernized the program’s web presence with clean layout architecture, simplifying schedule tracking and roster management.</p>
+              <div className='project-tech'>
+                <span>React</span>
+                <span>Responsive Design</span>
+                <span>Branding</span>
+              </div>
             </div>
-          </div>
+          </Link>
         </div>
       </section>
+      
 
       {/* VALUE PROP BANNER */}
       <div className='end-block'>

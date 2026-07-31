@@ -266,7 +266,7 @@ function Colby() {
       <nav ref={navRef}>
         <div className="nav-item">
           <Link to="/projects">
-            <p>BACK</p>
+            <p>MORE PROJECTS</p>
           </Link>
         </div>
 

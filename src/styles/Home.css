@@ -153,8 +153,10 @@
 .featured-section h2 {
   font-size: 2rem;
   letter-spacing: 1px;
-  margin-bottom: 0.5rem;
+  margin-bottom: 3rem;
 }
+
+
 
 .section-subtitle {
   color: #a1a1aa;
@@ -164,20 +166,23 @@
 
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-auto-rows: 1fr;  /* Add this */
   gap: 2rem;
   text-align: left;
 }
 
 .project-card {
   background: rgba(20, 20, 25, 0.6);
+  height: 110%;
   border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 2.25rem;
   border-radius: 16px;
   backdrop-filter: blur(12px);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+    gap: 1rem;  /* Add this */
+  justify-content: flex-start; 
   transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
@@ -209,6 +214,7 @@
 }
 
 .project-tech {
+    margin-top: auto;
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
@@ -236,7 +242,7 @@
   margin: 0 12%;
   padding: 4rem 2rem;
   text-align: center;
-  background: rgba(203, 203, 203, 0.6);
+  background: rgba(20, 20, 25, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 24px;
   position: relative;
@@ -247,6 +253,7 @@
 .value-banner h2 {
   font-size: clamp(1.8rem, 3vw, 2.5rem);
   margin-bottom: 1rem;
+  color: white;
 }
 
 .value-banner p {
