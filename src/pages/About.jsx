@@ -7,21 +7,6 @@ import transition from '../transitionGallery'
 import '../styles/About.css';
 
 function About() {
-  const location = useLocation(); // FIX: Initialized location variable so your useEffect can see it
-
-  useEffect(() => {
-    if (location.state?.scrollToContact) {
-      const timer = setTimeout(() => {
-        const contactSection = document.getElementById('contact-section');
-        contactSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        
-        // Clean up window history state payload
-        window.history.replaceState({}, document.title);
-      }, 150); // Bumped up slightly to guarantee canvas mounting layout calculations complete
-
-      return () => clearTimeout(timer);
-    }
-  }, [location]);
 
   return (
     <>
@@ -33,21 +18,21 @@ function About() {
                 <h1>ABOUT ME</h1> 
                <div className='info'>
                   <p>
-                    I’m Alex Duan, a Math and Computer Science student at Colby College specializing in custom web development and visual design for sports organizations. I bridge the gap between technical infrastructure and high-impact design so athletic programs can present a professional face to parents, recruits, and sponsors.
+                    I’m Alex Duan, a Math and Computer Science student at Colby College specializing in custom web development and visual design. I bridge the gap between technical infrastructure and high-impact design so businesses can present a professional face to their clients.
                   </p> 
                   <p>
-                    My work in sports development began with co-founding the <strong>East Coast Dragons</strong>, a hockey tournament business. I built our web applications and streamlined registration pipelines from scratch while crafting the visual marketing that scaled our community to over 200+ athletes. I learned firsthand what team directors actually need: tools that save administrative time and a web presence that inspires trust.
+                    My work in branding and web development began with co-founding the <strong>East Coast Dragons</strong>, a hockey tournament business. I built our web applications and streamlined registration pipelines from scratch while crafting the visual marketing that scaled our community to over 200+ athletes. I learned firsthand what team directors actually need: tools that save administrative time and a web presence that inspires trust.
                   </p>  
                   <p>
                     Since then, I’ve partnered with programs like <strong>Colby Men’s Soccer</strong> and <strong>Colby Club Hockey</strong> to elevate their digital identities. From custom interactive interfaces to crisp mobile layouts, I treat brand design and web engineering as two sides of the same coin.
                   </p>  
                   <p>
-                    Whether you run a youth league, a competitive travel club, or a sports tournament, I build fast, tailored websites that simplify operations and make your organization stand out.
+                    Whatever your business is, I build fast, tailored websites that simplify operations and make your organization stand out.
                   </p>      
                 </div>   
             </div>
-          <div className='contact-content' id='contact-section'>
-            <h1>CONTACT ME</h1> 
+          <div className='contact-content'>
+            <h1>CONTACT INFO</h1> 
             <div className='info contact-grid'>
               
               {/* EMAIL ITEM */}

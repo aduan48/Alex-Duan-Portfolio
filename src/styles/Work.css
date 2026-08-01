@@ -205,11 +205,33 @@
   transform: translateX(0px);
 }
 
+
+.work-links-mobile{
+    display: none;
+}
+
 @media only screen and (max-width: 1200px) {
   .minimap-node .node-title,
   .minimap-node.active .node-title {
     display: none !important;
   }
+}
+
+@media only screen and (max-width: 900px) {
+  .minimap-node .node-title, .work-links,
+  .minimap-node.active .node-title {
+    display: none !important;
+  }
+
+  .work-links-mobile{
+    display: flex;
+    align-items: center;   
+    justify-content: left;
+    margin-top: -0.5em;
+    margin-left: -1em;
+    margin-bottom: .5em;
+  }
+
 }
 
 /* Responsive clean breakpoint hide for small phone form factors */

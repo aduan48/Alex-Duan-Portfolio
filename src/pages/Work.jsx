@@ -117,6 +117,11 @@ function Work() {
               <a href="https://github.com/aduan48/East-Coast-Dragons" target="_blank" rel="noopener noreferrer">GITHUB</a>
             </div>
           </div>
+            <div className='work-links-mobile'>
+              <Link to="/projects/dragons"> VIEW </Link>
+              <a href="https://eastcoastdragons.com/" target="_blank" rel="noopener noreferrer">SITE</a>
+              <a href="https://github.com/aduan48/East-Coast-Dragons" target="_blank" rel="noopener noreferrer">GITHUB</a>
+            </div>
           <div className='content'>
             <p>A sleek full-stack web experience built for the East Coast Dragons, blending sharp visual identity with functional infrastructure. The site uses modern React patterns and refined CSS styling to create an on-brand digital presence that feels fast, polished, and athletic. Beyond the frontend, it integrates a secure registration system with PayPal payments and a Google Sheets backend, turning the website into both a promotional platform and a streamlined operational tool for managing player data, payments, and tournament signups.</p>
          </div>
@@ -134,6 +139,11 @@ function Work() {
               <a href="https://github.com/aduan48/Colby-Club-Hockey-V2026" target="_blank" rel="noopener noreferrer">GITHUB</a>
             </div>
           </div>
+          <div className='work-links-mobile'>
+              <Link to="/projects/club-hockey"> VIEW </Link>
+              <a href="https://colbyclubhockey.com/" target="_blank" rel="noopener noreferrer">SITE</a>
+              <a href="https://github.com/aduan48/Colby-Club-Hockey-V2026" target="_blank" rel="noopener noreferrer">GITHUB</a>
+            </div>
           <div className='content'>
             <p>A polished full-stack web experience built for Colby Club Hockey, combining modern React architecture with adaptive styling, interactive 3D elements, and a clean athletic identity. The site creates a responsive digital presence that feels fast, dynamic, and on-brand, while giving users easy access to team information, schedules, rosters, and livestream links. Beyond the frontend, the platform uses Netlify Forms for serverless submission tracking, local storage to protect user inputs from accidental refreshes, and backend functions that separate raw schedule data from the client. By parsing external JSON files into interactive rosters and game timelines, the website becomes both a promotional home for the club and a functional tool for managing updates, player information, and team operations.
 
@@ -153,6 +163,10 @@ function Work() {
               <a href="https://www.instagram.com/ephemeral.nova/" target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
             </div>
           </div>
+            <div className='work-links-mobile'>
+              <Link to="/projects/ephemeral"> VIEW </Link>
+              <a href="https://www.instagram.com/ephemeral.nova/" target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
+            </div>
           <div className='content'>
             <p>A visual exploration of distortion, memory, and digital impermanence that moves beyond minimalism into sensory-driven design. Centered around intimate, striking portraiture, the collection establishes an immediate psychological connection with the viewer. This moody, cinematic tension is brought to life through a high-contrast, late-night palette of deep blacks, glowing neons, and burning ambers that pulse with kinetic energy.</p>
           </div>
@@ -169,6 +183,10 @@ function Work() {
               <a href="https://www.instagram.com/colbymsoccer/" target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
             </div>
           </div>
+            <div className='work-links-mobile'>
+              <Link to="/projects/colby"> VIEW </Link>
+              <a href="https://www.instagram.com/colbymsoccer/" target="_blank" rel="noopener noreferrer">INSTAGRAM</a>
+            </div>
           <div className='content'>
             <p>A dynamic visual exploration of collegiate athletic identity and momentum that shifts sports promotion into narrative-driven design. Utilizing sharp diagonal layouts, vertical typography, and split-frame compositions, the collection captures the high-stakes kinetic energy of the game without relying on repetitive templates. The work leverages a fierce, cinematic palette of institutional Colby Blue, crisp whites, and atmospheric textures to anchor the audience directly into the team's athletic universe.</p>
           </div>

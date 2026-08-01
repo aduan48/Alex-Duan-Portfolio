@@ -16,11 +16,11 @@ function Navbar() {
   const handleContactClick = (e) => {
     e.preventDefault(); 
 
-    if (location.pathname === '/about') {
+    if (location.pathname === '/home' || location.pathname === '/') {
       const contactSection = document.getElementById('contact-section');
       contactSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } else {
-      navigate('/about', { state: { scrollToContact: true } });
+      navigate('/', { state: { scrollToContact: true } });
     }
   };
 

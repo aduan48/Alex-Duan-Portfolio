@@ -37,7 +37,7 @@
 .About p {
   font-size: 16px;
   line-height: 1.6;        /* Slightly relaxed line-height for much better legibility */
-  color: #d6d4d4;
+  color: var(--code-bg);
   margin-bottom: 1.5vh;
   text-align: justify;     /* Clean, justified structure to mirror your projects page */
 }

@@ -17,6 +17,7 @@ function AnimatedRoutes() {
 
   return (
     <AnimatePresence mode="wait">
+      <ScrollToTop/>
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
@@ -36,7 +37,10 @@ function AnimatedRoutes() {
 function App() {
   return (
     <div className="App">
-
+        <div className="orientation-blocker">
+        <h1>ALEX DUAN PORTFOLIO</h1>
+        <p>Please view this content on a horizontal screen.</p>
+      </div>
 
       <Router>
         <ScrollToTop />

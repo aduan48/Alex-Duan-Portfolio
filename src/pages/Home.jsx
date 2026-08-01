@@ -1,11 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import FluidCanvas from '../components/FluidCanvas';
 import transition from '../transitionGallery';
+import Footer from '../components/Footer';
+import Contact from '../components/Contact';
 import dragonsHomepageDemo from '../dragons_website/homepage_demo.mp4';
 import clubHockeyHomepageDemo from '../colby_website/homepage_demo.mp4'
+import soccerPreview from '../colby_portfolio/soccer_preview.mp4'
 import '../styles/Home.css';
+import Carousel from '../components/Carousel'
 
 const projects = [
   {
@@ -22,7 +26,7 @@ const projects = [
     title: "Colby Men's Soccer",
     desc: 'Architected a high-energy digital brand presence and interactive frontend to engage fans, recruit athletes, and keep parents updated.',
     tech: ['UI/UX Design', 'Frontend Development', 'Media Strategy'],
-    video: '/media/colby-preview.mp4',
+    video: soccerPreview,
   },
   {
     slug: '/projects/club-hockey',
@@ -37,10 +41,13 @@ const projects = [
 function Home() {
   const heroRef = useRef(null);
   const featuredRef = useRef(null);
+  const contactRef = useRef(null);
   const previewRef = useRef(null);
   const xTo = useRef(null);
   const yTo = useRef(null);
   const [activeVideo, setActiveVideo] = useState(null);
+  const location = useLocation();
+
 
   useEffect(() => {
     gsap.fromTo(
@@ -59,6 +66,20 @@ function Home() {
     xTo.current = gsap.quickTo(previewRef.current, 'x', { duration: 0.5, ease: 'power3' });
     yTo.current = gsap.quickTo(previewRef.current, 'y', { duration: 0.5, ease: 'power3' });
   }, []);
+
+  useEffect(() => {
+    if (location.state?.scrollToContact) {
+      const timer = setTimeout(() => {
+        const contactSection = document.getElementById('contact-section');
+        contactSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        
+        // Clean up window history state payload
+        window.history.replaceState({}, document.title);
+      }, 150); // Bumped up slightly to guarantee canvas mounting layout calculations complete
+
+      return () => clearTimeout(timer);
+    }
+  }, [location]);
 
   const handleMouseMove = (e) => {
     xTo.current?.(e.clientX -3);
@@ -79,6 +100,11 @@ function Home() {
     featuredRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
+  const scrollToContact = (e) => {
+    e.preventDefault();
+    contactRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   return (
     <div className='Home'>
       <FluidCanvas className='gradient-canvas' />
@@ -92,9 +118,9 @@ function Home() {
             <a href='#featured-work' className='btn-primary' onClick={scrollToFeatured}>
               View Featured Projects
             </a>
-            <Link to='/about' state={{ scrollToContact: true }} className='btn-secondary'>
+            <a  href='#contact' onClick={scrollToContact} className='btn-secondary'>
               Contact Me
-            </Link>
+            </a>
           </div>
         </div>
       </div>
@@ -129,24 +155,21 @@ function Home() {
           </div>
         </section>
 
+        <Carousel />
+
         {/* VALUE PROP BANNER */}
-        <div className='end-block'>
-          <section className='value-banner'>
-            <h2>Ready to Upgrade Your Website & Branding?</h2>
-            <p>Whether you need a full custom build, seamless registration flows, or a refreshed visual brand, let's talk about your team.</p>
-            <Link to='/about' state={{ scrollToContact: true }} className='btn-primary'>
-              Start a Conversation
-            </Link>
-          </section>
+        <div className='contact-section' id = 'contact-section' ref={contactRef}>
+          <Contact />
         </div>
       </div>
 
       {/* CURSOR-FOLLOW VIDEO PREVIEW */}
-      <div className='card-preview' ref={previewRef}>
+      <div className='card-preview'id ref={previewRef}>
         {activeVideo && (
           <video key={activeVideo} src={activeVideo} autoPlay muted loop playsInline />
         )}
       </div>
+      <Footer />
     </div>
   );
 }
