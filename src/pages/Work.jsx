@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import '../styles/Work.css'
 import FluidCanvas from '../components/FluidCanvas';
 import transition from '../transitionGallery';
+import Footer from '../components/Footer'
 
 function Work() {
   const [activeProject, setActiveProject] = useState(0);
