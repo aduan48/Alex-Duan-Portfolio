@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { Link, useLocation } from 'react-router-dom';
-import FluidCanvas from '../components/FluidCanvas';
 import transition from '../transitionGallery';
 import Footer from '../components/Footer';
 import Contact from '../components/Contact';
@@ -107,7 +106,7 @@ function Home() {
 
   return (
     <div className='Home'>
-      <FluidCanvas className='gradient-canvas' />
+
 
       {/* HERO SECTION */}
       <div className='hero' ref={heroRef}>

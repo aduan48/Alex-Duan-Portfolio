@@ -186,46 +186,59 @@ function hexToRgb(hex) {
 
 export default function FluidCanvas({ colors = {} }) {
   const canvasContainerRef = useRef(null);
-  
-  // Merge customized values with defaults to guarantee it doesn't break if props are missing
-  const activeColors = {
-    color1: colors.color1 || defaultConfig.color1,
-    color2: colors.color2 || defaultConfig.color2,
-    color3: colors.color3 || defaultConfig.color3,
-    color4: colors.color4 || defaultConfig.color4,
-  };
+  const displayMaterialRef = useRef(null);
 
-  // Keep a live mutable reference so the render loop updates instantly if props swap
-  const colorsRef = useRef(activeColors);
+  const c1 = colors.color1 || defaultConfig.color1;
+  const c2 = colors.color2 || defaultConfig.color2;
+  const c3 = colors.color3 || defaultConfig.color3;
+  const c4 = colors.color4 || defaultConfig.color4;
+
+  // Holds the latest colors for initial material setup
+  const colorsRef = useRef({ c1, c2, c3, c4 });
+
+  // Push color changes straight to the uniforms — no per-frame hex parsing
   useEffect(() => {
-    colorsRef.current = activeColors;
-  }, [colors.color1, colors.color2, colors.color3, colors.color4]);
+    colorsRef.current = { c1, c2, c3, c4 };
+    const m = displayMaterialRef.current;
+    if (!m) return;
+    m.uniforms.uColor1.value.set(...hexToRgb(c1));
+    m.uniforms.uColor2.value.set(...hexToRgb(c2));
+    m.uniforms.uColor3.value.set(...hexToRgb(c3));
+    m.uniforms.uColor4.value.set(...hexToRgb(c4));
+  }, [c1, c2, c3, c4]);
 
   useEffect(() => {
     const container = canvasContainerRef.current;
     if (!container) return;
 
+    // Simulation resolution scale. 0.5 = quarter the pixels. Lower = faster, softer.
+    const SIM_SCALE = 0.5;
+
     let width = window.innerWidth;
     let height = window.innerHeight;
+    let simWidth = Math.max(1, Math.round(width * SIM_SCALE));
+    let simHeight = Math.max(1, Math.round(height * SIM_SCALE));
 
     const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    const renderer = new THREE.WebGLRenderer({
+      antialias: false, // no geometry edges on a fullscreen quad — pure waste
+      powerPreference: 'high-performance',
+    });
+    renderer.setPixelRatio(1); // never exceed CSS pixels, even on Retina
     renderer.setSize(width, height);
     container.appendChild(renderer.domElement);
 
-    let fluidTarget1 = new THREE.WebGLRenderTarget(width, height, {
+    const targetOptions = {
       minFilter: THREE.LinearFilter,
       magFilter: THREE.LinearFilter,
       format: THREE.RGBAFormat,
-      type: THREE.FloatType,
-    });
+      type: THREE.HalfFloatType, // half the bandwidth of FloatType, ample precision here
+      depthBuffer: false,
+      stencilBuffer: false,
+    };
 
-    let fluidTarget2 = new THREE.WebGLRenderTarget(width, height, {
-      minFilter: THREE.LinearFilter,
-      magFilter: THREE.LinearFilter,
-      format: THREE.RGBAFormat,
-      type: THREE.FloatType,
-    });
+    let fluidTarget1 = new THREE.WebGLRenderTarget(simWidth, simHeight, targetOptions);
+    let fluidTarget2 = new THREE.WebGLRenderTarget(simWidth, simHeight, targetOptions);
 
     let currentFluidTarget = fluidTarget1;
     let previousFluidTarget = fluidTarget2;
@@ -234,12 +247,14 @@ export default function FluidCanvas({ colors = {} }) {
     const fluidMaterial = new THREE.ShaderMaterial({
       uniforms: {
         iTime: { value: 0 },
-        iResolution: { value: new THREE.Vector2(width, height) },
+        // Fluid shader works in SIM space
+        iResolution: { value: new THREE.Vector2(simWidth, simHeight) },
         iMouse: { value: new THREE.Vector4(0, 0, 0, 0) },
         iFrame: { value: 0 },
         iPreviousFrame: { value: null },
-        uBrushSize: { value: defaultConfig.brushSize },
-        uBrushStrength: { value: defaultConfig.brushStrength },
+        // Brush falloff uses q^3 in sim pixels, so compensate by SIM_SCALE^3
+        uBrushSize: { value: defaultConfig.brushSize * Math.pow(SIM_SCALE, 3) },
+        uBrushStrength: { value: defaultConfig.brushStrength / SIM_SCALE },
         uFluidDecay: { value: defaultConfig.fluidDecay },
         uTrailLength: { value: defaultConfig.trailLength },
         uStopDecay: { value: defaultConfig.stopDecay },
@@ -251,19 +266,22 @@ export default function FluidCanvas({ colors = {} }) {
     const displayMaterial = new THREE.ShaderMaterial({
       uniforms: {
         iTime: { value: 0 },
+        // Display shader stays at FULL resolution
         iResolution: { value: new THREE.Vector2(width, height) },
         iFluid: { value: null },
         uDistortionAmount: { value: defaultConfig.distortionAmount },
-        uColor1: { value: new THREE.Vector3(...hexToRgb(colorsRef.current.color1)) },
-        uColor2: { value: new THREE.Vector3(...hexToRgb(colorsRef.current.color2)) },
-        uColor3: { value: new THREE.Vector3(...hexToRgb(colorsRef.current.color3)) },
-        uColor4: { value: new THREE.Vector3(...hexToRgb(colorsRef.current.color4)) },
+        uColor1: { value: new THREE.Vector3(...hexToRgb(colorsRef.current.c1)) },
+        uColor2: { value: new THREE.Vector3(...hexToRgb(colorsRef.current.c2)) },
+        uColor3: { value: new THREE.Vector3(...hexToRgb(colorsRef.current.c3)) },
+        uColor4: { value: new THREE.Vector3(...hexToRgb(colorsRef.current.c4)) },
         uColorIntensity: { value: defaultConfig.colorIntensity },
         uSoftness: { value: defaultConfig.softness },
       },
       vertexShader,
       fragmentShader: displayShader,
     });
+
+    displayMaterialRef.current = displayMaterial;
 
     const geometry = new THREE.PlaneGeometry(2, 2);
     const fluidPlane = new THREE.Mesh(geometry, fluidMaterial);
@@ -277,8 +295,9 @@ export default function FluidCanvas({ colors = {} }) {
       const rect = container.getBoundingClientRect();
       prevMouseX = mouseX;
       prevMouseY = mouseY;
-      mouseX = e.clientX - rect.left;
-      mouseY = rect.height - (e.clientY - rect.top);
+      // Mouse must be in SIM space, since the fluid shader compares against U
+      mouseX = (e.clientX - rect.left) * SIM_SCALE;
+      mouseY = (rect.height - (e.clientY - rect.top)) * SIM_SCALE;
       lastMoveTime = performance.now();
       fluidMaterial.uniforms.iMouse.value.set(mouseX, mouseY, prevMouseX, prevMouseY);
     };
@@ -291,7 +310,7 @@ export default function FluidCanvas({ colors = {} }) {
     document.addEventListener("mouseleave", handleMouseLeave);
 
     let animationFrameId;
-    
+
     function animate() {
       animationFrameId = requestAnimationFrame(animate);
 
@@ -304,21 +323,8 @@ export default function FluidCanvas({ colors = {} }) {
         fluidMaterial.uniforms.iMouse.value.set(0, 0, 0, 0);
       }
 
-      fluidMaterial.uniforms.uBrushSize.value = defaultConfig.brushSize;
-      fluidMaterial.uniforms.uBrushStrength.value = defaultConfig.brushStrength;
-      fluidMaterial.uniforms.uFluidDecay.value = defaultConfig.fluidDecay;
-      fluidMaterial.uniforms.uTrailLength.value = defaultConfig.trailLength;
-      fluidMaterial.uniforms.uStopDecay.value = defaultConfig.stopDecay;
-
-      displayMaterial.uniforms.uDistortionAmount.value = defaultConfig.distortionAmount;
-      displayMaterial.uniforms.uColorIntensity.value = defaultConfig.colorIntensity;
-      displayMaterial.uniforms.uSoftness.value = defaultConfig.softness;
-      
-      // Pull color setups live from the current state reference inside loop ticks
-      displayMaterial.uniforms.uColor1.value.set(...hexToRgb(colorsRef.current.color1));
-      displayMaterial.uniforms.uColor2.value.set(...hexToRgb(colorsRef.current.color2));
-      displayMaterial.uniforms.uColor3.value.set(...hexToRgb(colorsRef.current.color3));
-      displayMaterial.uniforms.uColor4.value.set(...hexToRgb(colorsRef.current.color4));
+      // Static config uniforms are set once at material creation.
+      // Colors are pushed by the props effect above, not re-parsed per frame.
 
       fluidMaterial.uniforms.iPreviousFrame.value = previousFluidTarget.texture;
       renderer.setRenderTarget(currentFluidTarget);
@@ -337,31 +343,41 @@ export default function FluidCanvas({ colors = {} }) {
 
     animate();
 
+    // Debounced: resize fires continuously during a window drag, and each call
+    // reallocates two render targets.
+    let resizeTimer;
     const handleResize = () => {
-      width = window.innerWidth;
-      height = window.innerHeight;
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        simWidth = Math.max(1, Math.round(width * SIM_SCALE));
+        simHeight = Math.max(1, Math.round(height * SIM_SCALE));
 
-      renderer.setSize(width, height);
-      fluidMaterial.uniforms.iResolution.value.set(width, height);
-      displayMaterial.uniforms.iResolution.value.set(width, height);
+        renderer.setSize(width, height);
+        fluidMaterial.uniforms.iResolution.value.set(simWidth, simHeight);
+        displayMaterial.uniforms.iResolution.value.set(width, height);
 
-      fluidTarget1.setSize(width, height);
-      fluidTarget2.setSize(width, height);
-      frameCount = 0;
+        fluidTarget1.setSize(simWidth, simHeight);
+        fluidTarget2.setSize(simWidth, simHeight);
+        frameCount = 0;
+      }, 150);
     };
 
     window.addEventListener("resize", handleResize);
 
     return () => {
       cancelAnimationFrame(animationFrameId);
+      clearTimeout(resizeTimer);
       document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseleave", handleMouseLeave);
       window.removeEventListener("resize", handleResize);
-      
+
       if (container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }
-      
+
+      displayMaterialRef.current = null;
       geometry.dispose();
       fluidMaterial.dispose();
       displayMaterial.dispose();
@@ -369,7 +385,7 @@ export default function FluidCanvas({ colors = {} }) {
       fluidTarget2.dispose();
       renderer.dispose();
     };
-  }, []); // Keeps Three lifecycle completely safe from color updates triggering complete destructions
+  }, []);
 
   return <div className='gradient-canvas' ref={canvasContainerRef}></div>;
 }

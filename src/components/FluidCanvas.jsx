@@ -190,27 +190,34 @@ export default function FluidCanvas() {
     const container = canvasContainerRef.current;
     if (!container) return;
 
+    // Simulation resolution scale. 0.5 = quarter the pixels. Lower = faster, softer.
+    const SIM_SCALE = 0.5;
+
     let width = container.clientWidth || window.innerWidth;
-  let height = container.clientHeight || window.innerHeight;
+    let height = container.clientHeight || window.innerHeight;
+    let simWidth = Math.max(1, Math.round(width * SIM_SCALE));
+    let simHeight = Math.max(1, Math.round(height * SIM_SCALE));
 
     const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    const renderer = new THREE.WebGLRenderer({
+      antialias: false, // no geometry edges on a fullscreen quad — pure waste
+      powerPreference: 'high-performance',
+    });
+    renderer.setPixelRatio(1); // never exceed CSS pixels, even on Retina
     renderer.setSize(width, height);
     container.appendChild(renderer.domElement);
 
-    let fluidTarget1 = new THREE.WebGLRenderTarget(width, height, {
+    const targetOptions = {
       minFilter: THREE.LinearFilter,
       magFilter: THREE.LinearFilter,
       format: THREE.RGBAFormat,
-      type: THREE.FloatType,
-    });
+      type: THREE.HalfFloatType, // half the bandwidth of FloatType, ample precision here
+      depthBuffer: false,
+      stencilBuffer: false,
+    };
 
-    let fluidTarget2 = new THREE.WebGLRenderTarget(width, height, {
-      minFilter: THREE.LinearFilter,
-      magFilter: THREE.LinearFilter,
-      format: THREE.RGBAFormat,
-      type: THREE.FloatType,
-    });
+    let fluidTarget1 = new THREE.WebGLRenderTarget(simWidth, simHeight, targetOptions);
+    let fluidTarget2 = new THREE.WebGLRenderTarget(simWidth, simHeight, targetOptions);
 
     let currentFluidTarget = fluidTarget1;
     let previousFluidTarget = fluidTarget2;
@@ -219,12 +226,14 @@ export default function FluidCanvas() {
     const fluidMaterial = new THREE.ShaderMaterial({
       uniforms: {
         iTime: { value: 0 },
-        iResolution: { value: new THREE.Vector2(width, height) },
+        // Fluid shader works in SIM space
+        iResolution: { value: new THREE.Vector2(simWidth, simHeight) },
         iMouse: { value: new THREE.Vector4(0, 0, 0, 0) },
         iFrame: { value: 0 },
         iPreviousFrame: { value: null },
-        uBrushSize: { value: config.brushSize },
-        uBrushStrength: { value: config.brushStrength },
+        // Brush falloff uses q^3 in sim pixels, so compensate by SIM_SCALE^3
+        uBrushSize: { value: config.brushSize * Math.pow(SIM_SCALE, 3) },
+        uBrushStrength: { value: config.brushStrength / SIM_SCALE },
         uFluidDecay: { value: config.fluidDecay },
         uTrailLength: { value: config.trailLength },
         uStopDecay: { value: config.stopDecay },
@@ -236,6 +245,7 @@ export default function FluidCanvas() {
     const displayMaterial = new THREE.ShaderMaterial({
       uniforms: {
         iTime: { value: 0 },
+        // Display shader stays at FULL resolution
         iResolution: { value: new THREE.Vector2(width, height) },
         iFluid: { value: null },
         uDistortionAmount: { value: config.distortionAmount },
@@ -262,8 +272,9 @@ export default function FluidCanvas() {
       const rect = container.getBoundingClientRect();
       prevMouseX = mouseX;
       prevMouseY = mouseY;
-      mouseX = e.clientX - rect.left;
-      mouseY = rect.height - (e.clientY - rect.top);
+      // Mouse must be in SIM space, since the fluid shader compares against U
+      mouseX = (e.clientX - rect.left) * SIM_SCALE;
+      mouseY = (rect.height - (e.clientY - rect.top)) * SIM_SCALE;
       lastMoveTime = performance.now();
       fluidMaterial.uniforms.iMouse.value.set(mouseX, mouseY, prevMouseX, prevMouseY);
     };
@@ -276,7 +287,7 @@ export default function FluidCanvas() {
     document.addEventListener("mouseleave", handleMouseLeave);
 
     let animationFrameId;
-    
+
     function animate() {
       animationFrameId = requestAnimationFrame(animate);
 
@@ -289,19 +300,9 @@ export default function FluidCanvas() {
         fluidMaterial.uniforms.iMouse.value.set(0, 0, 0, 0);
       }
 
-      fluidMaterial.uniforms.uBrushSize.value = config.brushSize;
-      fluidMaterial.uniforms.uBrushStrength.value = config.brushStrength;
-      fluidMaterial.uniforms.uFluidDecay.value = config.fluidDecay;
-      fluidMaterial.uniforms.uTrailLength.value = config.trailLength;
-      fluidMaterial.uniforms.uStopDecay.value = config.stopDecay;
-
-      displayMaterial.uniforms.uDistortionAmount.value = config.distortionAmount;
-      displayMaterial.uniforms.uColorIntensity.value = config.colorIntensity;
-      displayMaterial.uniforms.uSoftness.value = config.softness;
-      displayMaterial.uniforms.uColor1.value.set(...hexToRgb(config.color1));
-      displayMaterial.uniforms.uColor2.value.set(...hexToRgb(config.color2));
-      displayMaterial.uniforms.uColor3.value.set(...hexToRgb(config.color3));
-      displayMaterial.uniforms.uColor4.value.set(...hexToRgb(config.color4));
+      // NOTE: the per-frame config -> uniform sync block was removed.
+      // `config` is a module constant and never changes, so re-parsing four
+      // hex color strings every frame was pure waste.
 
       fluidMaterial.uniforms.iPreviousFrame.value = previousFluidTarget.texture;
       renderer.setRenderTarget(currentFluidTarget);
@@ -320,31 +321,40 @@ export default function FluidCanvas() {
 
     animate();
 
+    // Debounced: resize fires continuously during a window drag, and each call
+    // reallocates two float render targets.
+    let resizeTimer;
     const handleResize = () => {
-      width = container.clientWidth || window.innerWidth;
-      height = container.clientHeight || window.innerHeight;
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        width = container.clientWidth || window.innerWidth;
+        height = container.clientHeight || window.innerHeight;
+        simWidth = Math.max(1, Math.round(width * SIM_SCALE));
+        simHeight = Math.max(1, Math.round(height * SIM_SCALE));
 
-      renderer.setSize(width, height);
-      fluidMaterial.uniforms.iResolution.value.set(width, height);
-      displayMaterial.uniforms.iResolution.value.set(width, height);
+        renderer.setSize(width, height);
+        fluidMaterial.uniforms.iResolution.value.set(simWidth, simHeight);
+        displayMaterial.uniforms.iResolution.value.set(width, height);
 
-      fluidTarget1.setSize(width, height);
-      fluidTarget2.setSize(width, height);
-      frameCount = 0;
+        fluidTarget1.setSize(simWidth, simHeight);
+        fluidTarget2.setSize(simWidth, simHeight);
+        frameCount = 0;
+      }, 150);
     };
 
     window.addEventListener("resize", handleResize);
 
     return () => {
       cancelAnimationFrame(animationFrameId);
+      clearTimeout(resizeTimer);
       document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseleave", handleMouseLeave);
       window.removeEventListener("resize", handleResize);
-      
+
       if (container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }
-      
+
       geometry.dispose();
       fluidMaterial.dispose();
       displayMaterial.dispose();

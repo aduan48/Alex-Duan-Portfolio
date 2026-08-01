@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import Footer from '../components/Footer';
-import FluidCanvas from '../components/FluidCanvas';
 import { useLocation } from 'react-router-dom'; // FIX: Imported useLocation hook
 import transition from '../transitionGallery'
 import '../styles/About.css';
@@ -11,7 +10,6 @@ function About() {
   return (
     <>
     <div className='About'>
-         <FluidCanvas className = "gradient-canvas"/>
 
          <div className='about-content'>
             <div className='about-text'>

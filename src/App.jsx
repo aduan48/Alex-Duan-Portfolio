@@ -12,6 +12,8 @@ import About from './pages/About';
 import { AnimatePresence } from 'framer-motion';
 import ScrollToTop from './ScrollToTop';
 
+import FluidCanvas from './components/FluidCanvas';
+
 function AnimatedRoutes() {
   const location = useLocation();
 
@@ -44,6 +46,7 @@ function App() {
 
       <Router>
         <ScrollToTop />
+        <FluidCanvas className="gradient-canvas" />
         <Navbar />
         <AnimatedRoutes />
       </Router>

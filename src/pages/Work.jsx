@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import '../styles/Work.css'
-import FluidCanvas from '../components/FluidCanvas';
 import transition from '../transitionGallery';
 import Footer from '../components/Footer'
 
@@ -76,7 +75,6 @@ function Work() {
 
   return (
     <div className='Work'>
-      <FluidCanvas className="gradient-canvas"/>
       
       {/* MINIMALIST SIDEBAR MINIMAP */}
       <div className="work-minimap">
