@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Navbar from './components/Navbar'
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom'; 
+import { Navigate } from 'react-router-dom';
 import './App.css'
 import Home from './pages/Home'
 import Work from './pages/Work'
@@ -19,14 +20,11 @@ function AnimatedRoutes() {
 
   return (
     <AnimatePresence mode="wait">
-      <ScrollToTop/>
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/contact" element={<About />} />
+        <Route path="/home" element={<Navigate to="/" replace />} />
         <Route path="/about" element={<About />} />
         <Route path="/projects" element={<Work />} />
-        <Route path="/register" element={<Home />} />
         <Route path="/projects/ephemeral" element={<Ephemeral />} />
         <Route path="/projects/colby" element={<Colby />} />
         <Route path="/projects/club-hockey" element={<ClubHockey />} />

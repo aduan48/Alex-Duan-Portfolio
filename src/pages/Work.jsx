@@ -19,19 +19,7 @@ function Work() {
     { title: "COLBY SOCCER" }
   ];
 
-  // 1. DEDICATED SCROLL PROGRESS HOOK (Never reboots, stays buttery smooth)
-  useEffect(() => {
-    const handleScroll = () => {
-      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
-      if (totalScroll > 0) {
-        const currentProgress = (window.scrollY / totalScroll) * 100;
-        setScrollProgress(currentProgress);
-      }
-    };
 
-    window.addEventListener('scroll', handleScroll, { passive: true }); // passive helps scroll performance
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []); // EMPTY dependency array so it binds exactly ONCE
 
   // 2. DEDICATED INTERSECTION OBSERVER HOOK
   useEffect(() => {

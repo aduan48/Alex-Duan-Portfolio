@@ -47,6 +47,18 @@ function Home() {
   const [activeVideo, setActiveVideo] = useState(null);
   const location = useLocation();
 
+  const videoRefs = useRef({});
+
+const handleMouseEnter = (video) => {
+  setActiveVideo(video);
+  gsap.to(previewRef.current, { opacity: 1, scale: 1, duration: 0.4, ease: 'power3.out' });
+  Object.entries(videoRefs.current).forEach(([src, el]) => {
+    if (!el) return;
+    if (src === video) el.play().catch(() => {});
+    else el.pause();
+  });
+};
+
 
   useEffect(() => {
     gsap.fromTo(
@@ -85,10 +97,6 @@ function Home() {
     yTo.current?.(e.clientY -3);
   };
 
-  const handleMouseEnter = (video) => {
-    setActiveVideo(video);
-    gsap.to(previewRef.current, { opacity: 1, scale: 1, duration: 0.4, ease: 'power3.out' });
-  };
 
   const handleMouseLeave = () => {
     gsap.to(previewRef.current, { opacity: 0, scale: 0.85, duration: 0.3, ease: 'power3.in' });
@@ -163,10 +171,19 @@ function Home() {
       </div>
 
       {/* CURSOR-FOLLOW VIDEO PREVIEW */}
-      <div className='card-preview'id ref={previewRef}>
-        {activeVideo && (
-          <video key={activeVideo} src={activeVideo} autoPlay muted loop playsInline />
-        )}
+      <div className='card-preview' ref={previewRef}>
+        {projects.map((p) => (
+          <video
+            key={p.video}
+            src={p.video}
+            ref={(el) => { videoRefs.current[p.video] = el; }}
+            muted
+            loop
+            playsInline
+            preload="auto"
+            style={{ display: activeVideo === p.video ? 'block' : 'none' }}
+          />
+        ))}
       </div>
       <Footer />
     </div>
