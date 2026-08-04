@@ -22,7 +22,7 @@
 .hero {
   position: relative;
   width: 100%;
-  min-height: 95vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -51,7 +51,7 @@
 .hero-content h1 {
   font-size: 10em;
   line-height: 1.1;
-  margin: 0 0 -0.5rem 0;
+  margin:  0 -0.5rem 0;
   color: #ffffff;
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -62,7 +62,7 @@
   line-height: 1.6;
   color: #d4d4d8;
   margin: 0 auto 2.5rem auto;
-  max-width: 680px;
+  max-width: 880px;
 }
 
 .hero-actions {
@@ -71,6 +71,48 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+}
+
+.scroll-cue {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.65);
+  transition: color 0.25s ease, transform 0.25s ease;
+  animation: scroll-cue-bounce 2s ease-in-out infinite;
+}
+
+.scroll-cue:hover {
+  color: #ffffff;
+  transform: translateX(-50%) translateY(3px);
+}
+
+.scroll-cue-text {
+  font-size: 0.7rem;
+  letter-spacing: 3px;
+  font-weight: 600;
+}
+
+.scroll-cue-line {
+  width: 1px;
+  height: 32px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), transparent);
+}
+
+@keyframes scroll-cue-bounce {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(8px);
+  }
 }
 
 /* ==========================================================================
@@ -123,18 +165,114 @@
 .non-hero {
   position: relative;
   z-index: 2;
-  background-color: rgba(163, 163, 163, 0.3);
+  background-color: rgba(181, 222, 255, 0.3);
    /* Let the fixed canvas show through the whole page */
 }
 
+
+.case-study {
+  padding-top: 4em;
+  text-align: left;
+  margin-bottom: 3em;
+}
+
+.case-study-cta {
+  margin-top: -3rem;
+  text-align: center;
+  padding: 0 10%;
+}
+
+.case-study video {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  display: block;
+  overflow: hidden;
+}
+
+.case-study h2 {
+  text-align: left;
+  font-weight: 700;
+  margin-bottom: -1rem;
+  text-align: center;
+}
+
+/* --- Step layout --- */
+
+.case-study-step {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  
+}
+
+.case-study-step-marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+
+.case-study-step-line {
+  flex: 1;
+  width: 2px;
+  background: #ddd;
+  margin-top: 4px;
+  min-height: 60px;
+}
+
+.case-study-step-content {
+  padding: 2rem 1rem;
+  text-align: left;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 20px;
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(180%);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  margin-bottom: 2em;
+  
+}
+
+.case-study-step-header{
+  display: flex;
+  justify-content: space-between; /* Pushes title to the left, links to the right */
+  align-items: flex-end;          /* Aligns baseline/bottom edges perfectly */
+  border-bottom: 1px solid #eee;  /* Optional: adds a nice baseline anchor */
+  padding-bottom: 5px;            /* Optional: spacing above paragraph */
+  margin-bottom: 15px;  
+}
+
+.case-study-step-content h3 {
+  
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0 0 0.6rem;
+  margin-bottom: 0;
+  color: white;
+}
+
+.case-study-step-content p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--code-bg);
+  margin: 0;
+  text-align: left;
+}
+
+
+
+
 .featured-section {
   max-width: 100%;
+  margin-top: 0;
   margin: 0 10%;
-  padding: 6rem 2rem;
+  padding: 0 2rem;
   position: relative;
   z-index: 2;
   text-align: center;
-  margin-bottom: -5%;
+  margin-bottom: 5%;
 }
 
 .featured-section h2 {
@@ -159,11 +297,11 @@
 }
 
 .project-card {
-  background: rgba(255, 255, 255, 0.06);
   height: 100%;
-  min-height: 520px;
+  min-height: 600px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   padding: 2.25rem;
+  background: rgba(255, 255, 255, 0.06);
   border-radius: 20px;
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   backdrop-filter: blur(20px) saturate(180%);

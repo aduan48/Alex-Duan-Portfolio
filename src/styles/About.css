@@ -45,9 +45,11 @@
 .info {
   padding: 20px 24px;      /* Balanced padding all around */
   border-radius: 12px;
-  background: rgba(202, 202, 202, 0.3);   /* Softened background transparency for optimal contrast */
-  backdrop-filter: blur(20px);                
-  -webkit-backdrop-filter: blur(20px); 
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 20px;
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  backdrop-filter: blur(20px) saturate(120%);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
 }
 
 .gradient-canvas {

@@ -125,17 +125,93 @@ const handleMouseEnter = (video) => {
             <a href='#featured-work' className='btn-primary' onClick={scrollToFeatured}>
               View Featured Projects
             </a>
-            <a  href='#contact' onClick={scrollToContact} className='btn-secondary'>
+            <a href='#contact' onClick={scrollToContact} className='btn-secondary'>
               Contact Me
             </a>
           </div>
         </div>
+
+        <a href='#featured-work' className='scroll-cue' onClick={scrollToFeatured} aria-label='Scroll down'>
+          <span className='scroll-cue-text'>SCROLL TO SEE MORE</span>
+          <span className='scroll-cue-line'></span>
+        </a>
       </div>
 
       {/* FEATURED WORK SHOWCASE */}
       <div className='non-hero'>
         <section id='featured-work' className='featured-section' ref={featuredRef}>
-          <h2 className='featured-work-title'>FEATURED PROJECTS</h2>
+          <div className='case-study'>
+
+
+          <h2>REGISTRATION SOLUTION WITH ON-BRAND WEBSITE</h2>
+
+          <div className="case-study-step">
+            <div className="case-study-step-content">
+              <div className="case-study-step-header">
+                <h3>Overview</h3>
+                <h3 className="case-study-step-number">01</h3>
+              </div>
+              <p>
+                East Coast Dragons needed a registration system that could actually collect
+                payment, not just intent to pay. I designed and built a full-stack registration
+                platform with a React front end matching the team's brand identity, a Google
+                Sheets backend for data storage and automated confirmation emails, and the
+                PayPal SDK integrated directly into the form — combining sign-up, payment, and
+                confirmation into a single flow.
+              </p>
+            </div>
+          </div>
+
+          <div className="case-study-step">
+            <div className="case-study-step-content">
+              <div className="case-study-step-header">
+                <h3>The Problem</h3>
+                <h3 className="case-study-step-number">02</h3>
+              </div>
+              <p>
+                Registration previously ran through Google Forms, which had no way to collect
+                payment at the point of sign-up. Players would register, but without a payment
+                step built into the process, getting them to actually pay afterward was slow and
+                inconsistent, creating a persistent bottleneck in revenue collection. At the same
+                time, the team's website sat mostly unused, doing nothing to support registration
+                or reinforce the brand.
+              </p>
+            </div>
+          </div>
+
+          <div className="case-study-step">
+            <div className="case-study-step-content">
+              <div className="case-study-step-header">
+                <h3>The Solution</h3>
+                <h3 className="case-study-step-number">03</h3>
+              </div>
+              <p>
+                I replaced the Google Form with a custom React registration form embedded
+                directly in the website. On submission, player data is written to a Google
+                Sheets backend and a confirmation email is sent automatically, while the PayPal
+                SDK handles payment in the same step — closing the gap between registering and
+                paying. The result: a single, on-brand flow that resolved the payment bottleneck,
+                put the website to actual use, and gave the business a more legitimate,
+                professional presence.
+              </p>
+            </div>
+          </div>
+
+            <div className="case-study-cta">
+                <Link to = '/projects/dragons' style={{ textDecoration: 'none', color: 'inherit' }}>
+                <video autoPlay loop muted playsInline className="case-study video">
+                  <source src={dragonsHomepageDemo} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </Link>
+              <Link to='/projects/dragons' className='btn-primary'>
+                View Full Project
+              </Link>
+            </div>
+        </div>
+
+
+          <h2 className='featured-work-title'>MORE FEATURED PROJECTS</h2>
 
           <div className='project-grid'>
             {projects.map((p) => (

@@ -79,7 +79,9 @@ function Contact() {
           <input type= 'email' id = 'email' name = "email" placeholder = "example@gmail.com" value ={email} onChange={handleEmail} required/>
           <label htmlFor='message'>Message:</label>
           <textarea id='message' rows="10" columns="30" name="message" placeholder="Leave a comment" value={message} onChange={handleMessage} required></textarea>
-          <button type="submit">Submit</button> 
+          <div className='submit-button'>
+            <button type="submit">Submit</button> 
+          </div>
         </form>
 
         </div>

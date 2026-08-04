@@ -112,3 +112,7 @@ button[type="submit"]:hover {
 #Contact-Us{
     margin-bottom: 40px;
 }
+
+.submit-button{
+      text-align: center;
+}

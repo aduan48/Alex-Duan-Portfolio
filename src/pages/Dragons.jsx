@@ -23,11 +23,15 @@ function Dragons() {
         <div className="slide-inner-content">
           <h1>Overview</h1> 
           <p><strong>STACK:  </strong>React | JavaScript | HTML5/CSS3 | Netlify | Git | PayPal SDK | Google Sheets API</p>
+                <p><strong>PROBLEM: </strong>Registration ran through Google Forms with no built-in payment, so players signed up but rarely followed through on paying.</p>
+          <p><strong>SOLUTION: </strong>A custom React form now handles registration, payment via PayPal, and confirmation emails in one flow.</p>
+
           <p>This is a full-stack web application for the East Coast Dragons. 
             It utlizies modern React patterns and CSS styles for a sleek on-brand front end that matches the brand's identity
             It also implments a registration form that integrates PayPal SDK for the payment pipeline 
             and a Google Sheets API back end to store user data.
           </p>
+
 
           <div className='slide-footer'>
              <p> <strong>SCROLL UP FOR NEXT SLIDE</strong></p>
