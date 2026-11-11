@@ -9,6 +9,7 @@ import Ephemeral from './pages/Ephemeral';
 import Colby from './pages/Colby';
 import ClubHockey from './pages/ClubHockey'
 import Dragons from './pages/Dragons';
+import Freelance from './pages/Freelance'
 import About from './pages/About';
 import { AnimatePresence } from 'framer-motion';
 import ScrollToTop from './ScrollToTop';
@@ -29,6 +30,7 @@ function AnimatedRoutes() {
         <Route path="/projects/colby" element={<Colby />} />
         <Route path="/projects/club-hockey" element={<ClubHockey />} />
         <Route path="/projects/dragons" element={<Dragons />} />
+        <Route path="/projects/freelance" element={<Freelance />} />
       </Routes>
     </AnimatePresence>
   );

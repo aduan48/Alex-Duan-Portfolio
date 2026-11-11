@@ -6,7 +6,7 @@ import { CustomEase } from 'gsap/CustomEase';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import FluidCanvas from '../components/FluidCanvasBW';
 
-import '../styles/Colby.css';
+import '../styles/Gallery.css';
 import { Link } from 'react-router-dom';
 import transition from '../transitionGallery';
 
@@ -23,6 +23,20 @@ import slide10 from '../colby_portfolio/slide-10.webp';
 import slide11 from '../colby_portfolio/slide-11.webp';
 import slide12 from '../colby_portfolio/slide-12.webp';
 
+// Lightweight 640px versions for the Gallery / Info views (sharper when shrunk)
+import thumb1 from '../colby_portfolio/thumbs/slide-1.webp';
+import thumb2 from '../colby_portfolio/thumbs/slide-2.webp';
+import thumb3 from '../colby_portfolio/thumbs/slide-3.webp';
+import thumb4 from '../colby_portfolio/thumbs/slide-4.webp';
+import thumb5 from '../colby_portfolio/thumbs/slide-5.webp';
+import thumb6 from '../colby_portfolio/thumbs/slide-6.webp';
+import thumb7 from '../colby_portfolio/thumbs/slide-7.webp';
+import thumb8 from '../colby_portfolio/thumbs/slide-8.webp';
+import thumb9 from '../colby_portfolio/thumbs/slide-9.webp';
+import thumb10 from '../colby_portfolio/thumbs/slide-10.webp';
+import thumb11 from '../colby_portfolio/thumbs/slide-11.webp';
+import thumb12 from '../colby_portfolio/thumbs/slide-12.webp';
+
 gsap.registerPlugin(Flip, CustomEase, ScrollToPlugin);
 
 CustomEase.create(
@@ -31,19 +45,23 @@ CustomEase.create(
 );
 
 const slides = [
-  slide1,
-  slide2,
-  slide3,
-  slide4,
-  slide5,
-  slide6,
-  slide7,
-  slide8,
-  slide9,
-  slide10,
-  slide11,
-  slide12,
+  slide1, slide2, slide3, slide4, slide5, slide6,
+  slide7, slide8, slide9, slide10, slide11, slide12,
 ];
+
+const thumbs = [
+  thumb1, thumb2, thumb3, thumb4, thumb5, thumb6, thumb7, thumb8, thumb9, thumb10, thumb11, thumb12,
+];
+
+// Theme class from Gallery.css ('theme-light' or 'theme-dark')
+const THEME = 'theme-light';
+
+const lightTheme = {
+  color1: '#ffffff',
+  color2: '#ffffff',
+  color3: '#cccccc',
+  color4: '#ffffff',
+};
 
 function Colby() {
   const navRef = useRef(null);
@@ -54,17 +72,9 @@ function Colby() {
   const activeLayoutRef = useRef('layout-1-gallery');
   const lenisRef = useRef(null);
 
-
-  const lightTheme = {
-    color1: "#ffffff",
-    color2: "#ffffff",
-    color3: "#cccccc",
-    color4: "#ffffff"
-  };
-
   useEffect(() => {
-    document.body.classList.add('colby-page');
-    
+    document.body.classList.add('gallery-page', THEME);
+
     // Initialize Lenis
     const lenis = new Lenis({
       duration: 1.2,
@@ -89,15 +99,14 @@ function Colby() {
     // Initial resets
     gsap.set([imgPreviews, minimap], { autoAlpha: 0 });
     gsap.set(layoutText, { autoAlpha: 0, y: 20 });
-    
-    // --- FIX: Apply the 'active' class on initial load ---
+
+    // Apply the 'active' class on initial load
     items.forEach((item) => {
       item.classList.toggle('active', item.id === activeLayoutRef.current);
     });
-    // -----------------------------------------------------
-    
+
     function enableLayout2Scroll() {
-      document.body.classList.add('colby-can-scroll');
+      document.body.classList.add('gallery-can-scroll');
 
       requestAnimationFrame(() => {
         lenis.scrollTo(0, { immediate: true });
@@ -108,63 +117,56 @@ function Colby() {
     }
 
     function disableLayout2Scroll() {
-      // 1. Instantly snap Lenis virtual wrapper back to 0
       lenis.scrollTo(0, { immediate: true });
-      // 2. Stop Lenis operations
       lenis.stop();
-      // 3. Fallback native scroll window reset
       window.scrollTo(0, 0);
-      
-      document.body.classList.remove('colby-can-scroll');
+
+      document.body.classList.remove('gallery-can-scroll');
     }
 
-    // Force initialization to start disabled (since initial layout is 1)
+    // Start disabled (initial layout is 1)
     disableLayout2Scroll();
 
-  function handleScroll() {
-    if (activeLayoutRef.current !== 'layout-2-gallery') return;
+    function handleScroll() {
+      if (activeLayoutRef.current !== 'layout-2-gallery') return;
 
-    const previewImages = imgPreviews.querySelectorAll('img');
-    const galleryItems = gallery.querySelectorAll('.img');
+      const previewImages = imgPreviews.querySelectorAll('img');
+      const galleryItems = gallery.querySelectorAll('.img');
+      if (!previewImages.length || !galleryItems.length) return;
 
-    if (!previewImages.length || !galleryItems.length) return;
+      const scrollY = lenis.scroll || window.scrollY || 0;
 
-    // 1. Get current real-time Lenis scroll offset coordinates
-    const scrollY = lenis.scroll || window.scrollY || 0;
+      const totalPreviewHeight = imgPreviews.scrollHeight - window.innerHeight;
+      if (totalPreviewHeight <= 0) return;
 
-    // 2. Calculate the exact scrollable path height of the center previews
-    const totalPreviewHeight = imgPreviews.scrollHeight - window.innerHeight;
-    if (totalPreviewHeight <= 0) return;
+      const scrollProgress = Math.max(0, Math.min(scrollY / totalPreviewHeight, 1));
 
-    // 3. Determine the 0 to 1 scroll progress decimal ratio
-    const scrollProgress = Math.max(0, Math.min(scrollY / totalPreviewHeight, 1));
+      const singleThumbHeight = galleryItems[0].offsetHeight;
+      const singleThumbMargin = parseFloat(
+        window.getComputedStyle(galleryItems[0]).marginBottom || 0
+      );
+      const thumbStep = singleThumbHeight + singleThumbMargin;
 
-    // 4. Calculate the size of a single thumbnail block item (height + margin spacing)
-    const singleThumbHeight = galleryItems[0].offsetHeight;
-    const singleThumbMargin = parseFloat(window.getComputedStyle(galleryItems[0]).marginBottom || 0);
-    const thumbStep = singleThumbHeight + singleThumbMargin;
+      // Shift just far enough to bring the last thumb to the top
+      const totalGalleryTravel = (galleryItems.length - 1) * thumbStep;
+      const galleryTranslateY = -scrollProgress * totalGalleryTravel;
 
-    // 5. FIXED TRAVEL MATH: 
-    // The gallery only needs to shift by the distance required to bring the last thumb to the top.
-    // That distance is: (Total Items - 1) * the height step of one item.
-    const totalGalleryTravel = (galleryItems.length - 1) * thumbStep;
-
-    // 6. Project the progress ratio onto the thumbnail dimensions 
-    const galleryTranslateY = -scrollProgress * totalGalleryTravel;
-
-    // 7. Render layout transition smoothly
-    gsap.to(gallery, {
-      y: galleryTranslateY,
-      ease: 'power2.out',
-      duration: 0.2, 
-    });
-  }
+      gsap.to(gallery, {
+        y: Math.round(galleryTranslateY),
+        ease: 'power2.out',
+        duration: 0.2,
+        snap: 'y', // whole pixels only, so thumbnails never sit on a half-pixel
+      });
+    }
 
     function switchLayout(newLayout) {
       if (newLayout === activeLayoutRef.current) return;
 
-      // Smooth scroll up natively before committing if coming from Layout 2
-      if (activeLayoutRef.current === 'layout-2-gallery' && (window.scrollY > 5 || lenis.scroll > 5)) {
+      // Smooth scroll up before switching if coming from Layout 2
+      if (
+        activeLayoutRef.current === 'layout-2-gallery' &&
+        (window.scrollY > 5 || lenis.scroll > 5)
+      ) {
         lenis.scrollTo(0, {
           duration: 0.5,
           onComplete: () => switchLayoutHandler(newLayout),
@@ -183,56 +185,31 @@ function Colby() {
       gallery.classList.remove(oldLayout);
       gallery.classList.add(newLayout);
 
-      let staggerValue = 0.025;
-      if (
-        (oldLayout === 'layout-1-gallery' && newLayout === 'layout-2-gallery') ||
-        (oldLayout === 'layout-3-gallery' && newLayout === 'layout-2-gallery')
-      ) {
-        staggerValue = 0;
-      }
+      const staggerValue = isLayout2 ? 0 : 0.025;
 
       Flip.from(state, {
         duration: 1.5,
         ease: 'hop',
         stagger: staggerValue,
+        // Drop leftover transforms once the move ends, so images render crisp
+        onComplete: () => gsap.set(gallery.querySelectorAll('.img'), { clearProps: 'transform' }),
       });
 
       activeLayoutRef.current = newLayout;
 
       if (isLayout2) {
         enableLayout2Scroll();
-
-        gsap.to([imgPreviews, minimap], {
-          autoAlpha: 1,
-          duration: 0.3,
-          delay: 0.5,
-        });
+        gsap.to([imgPreviews, minimap], { autoAlpha: 1, duration: 0.3, delay: 0.5 });
       } else {
         disableLayout2Scroll();
-
-        gsap.to([imgPreviews, minimap], {
-          autoAlpha: 0,
-          duration: 0.3,
-        });
-
+        gsap.to([imgPreviews, minimap], { autoAlpha: 0, duration: 0.3 });
         gsap.set(gallery, { clearProps: 'y' });
       }
 
       if (newLayout === 'layout-3-gallery') {
-        gsap.to(layoutText, {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.6,
-          delay: 0.5,
-          ease: 'power3.out',
-        });
+        gsap.to(layoutText, { autoAlpha: 1, y: 0, duration: 0.6, delay: 0.5, ease: 'power3.out' });
       } else {
-        gsap.to(layoutText, {
-          autoAlpha: 0,
-          y: 20,
-          duration: 0.3,
-          ease: 'power3.out',
-        });
+        gsap.to(layoutText, { autoAlpha: 0, y: 20, duration: 0.3, ease: 'power3.out' });
       }
 
       items.forEach((item) => {
@@ -247,12 +224,10 @@ function Colby() {
     }
 
     nav.addEventListener('click', handleNavClick);
-    // Listen to Lenis scroll emissions rather than generic window events
     lenis.on('scroll', handleScroll);
 
     return () => {
-      document.body.classList.remove('colby-page');
-      document.body.classList.remove('colby-can-scroll');
+      document.body.classList.remove('gallery-page', THEME, 'gallery-can-scroll');
 
       cancelAnimationFrame(rafId);
       lenis.destroy();
@@ -262,7 +237,7 @@ function Colby() {
   }, []);
 
   return (
-    <div className="colby-body">
+    <div className="gallery-body">
       <nav ref={navRef}>
         <div className="nav-item">
           <Link to="/projects">
@@ -283,40 +258,41 @@ function Colby() {
         </div>
       </nav>
 
-  <div className="layout-3-text" ref={layoutTextRef}>
-    <h1>Colby Soccer</h1>
+      <div className="layout-3-text" ref={layoutTextRef}>
+        <h1>Colby Soccer</h1>
         <p>
-        A dynamic visual exploration of collegiate athletic identity, momentum, and 
-        brand cohesion. Moving beyond standard sports promotion, this collection functions 
-        as an intentional dive into narrative-driven graphic design—focusing on how 
-        visual mediums can capture the high-stakes kinetic energy of Colby Men's Soccer 
-        rather than relying on static game-day layouts.
+          A dynamic visual exploration of collegiate athletic identity, momentum, and
+          brand cohesion. Moving beyond standard sports promotion, this collection functions
+          as an intentional dive into narrative-driven graphic design—focusing on how
+          visual mediums can capture the high-stakes kinetic energy of Colby Men's Soccer
+          rather than relying on static game-day layouts.
         </p>
 
         <p>
-        The creative direction relies heavily on a structured yet versatile visual hierarchy. 
-        By utilizing variations in spatial layout—ranging from sharp diagonal slashes and 
-        vertical typographic pillars to stacked "Double Header" split-frames—the work 
-        avoids repetitive templating. Instead, each unique composition introduces a new 
-        rhythm that adapts seamlessly to the specific narrative of the match, while 
-        retaining a unified core identity.
+          The creative direction relies heavily on a structured yet versatile visual hierarchy.
+          By utilizing variations in spatial layout—ranging from sharp diagonal slashes and
+          vertical typographic pillars to stacked "Double Header" split-frames—the work
+          avoids repetitive templating. Instead, each unique composition introduces a new
+          rhythm that adapts seamlessly to the specific narrative of the match, while
+          retaining a unified core identity.
         </p>
 
         <p>
-        To establish a powerful, authoritative brand presence, the work leverages a meticulous, 
-        monochromatic color theory deeply rooted in the institution's heritage. Pervasive 
-        layers of Colby Blue are masterfully juxtaposed against crisp whites, subtle drop 
-        shadows, and atmospheric smoke textures. This consistent palette, paired with recurring 
-        brand elements like the Mule mascot silhouette, the stylized "C" crest, and distinct 
-        opponent iconography, anchors the audience directly into a fierce, cinematic athletic 
-        universe.
-        </p> 
-  </div>
+          To establish a powerful, authoritative brand presence, the work leverages a meticulous,
+          monochromatic color theory deeply rooted in the institution's heritage. Pervasive
+          layers of Colby Blue are masterfully juxtaposed against crisp whites, subtle drop
+          shadows, and atmospheric smoke textures. This consistent palette, paired with recurring
+          brand elements like the Mule mascot silhouette, the stylized "C" crest, and distinct
+          opponent iconography, anchors the audience directly into a fierce, cinematic athletic
+          universe.
+        </p>
+      </div>
+
       <div className="gallery-container">
         <div className="gallery layout-1-gallery" ref={galleryRef}>
-          {slides.map((slide, index) => (
+          {thumbs.map((thumb, index) => (
             <div className="img" id={`img${index + 1}`} key={index}>
-              <img src={slide} alt="" />
+              <img src={thumb} alt="" decoding="async" />
             </div>
           ))}
         </div>
@@ -330,7 +306,7 @@ function Colby() {
         ))}
       </div>
 
-      <FluidCanvas className = "gradient-canvas" colors={lightTheme}/>
+      <FluidCanvas className="gradient-canvas" colors={lightTheme} />
     </div>
   );
 }

@@ -1,0 +1,266 @@
+/* =========================================================
+   GALLERY.CSS â€” shared styles for every gallery project page
+   Usage: <body class="gallery-page theme-light | theme-dark">
+          <div class="gallery-body"> ... </div>
+   ========================================================= */
+
+/* --- THEME TOKENS --- */
+body.gallery-page.theme-light {
+  --nav-bg: rgba(219, 219, 219, 0.4);
+  --nav-text: #000000;
+  --accent: #000000;          /* brackets, active underline, minimap border */
+  --heading: #000000;
+  --body-text: #333333;
+  --text-top: 41%;
+}
+
+body.gallery-page.theme-dark {
+  --nav-bg: rgba(54, 54, 54, 0.6);
+  --nav-text: #ffffff;
+  --accent: #ffffff;
+  --heading: #ffffff;
+  --body-text: #d6d4d4;
+  --text-top: 38%;
+}
+
+/* --- GLOBAL BODY LOCKS --- */
+body.gallery-page {
+  overflow: hidden !important;
+  height: 100vh;
+}
+
+body.gallery-page.gallery-can-scroll {
+  overflow-y: auto !important;
+  height: auto;
+}
+
+/* --- WRAPPER & MEDIA SCALERS --- */
+.gallery-body {
+  min-height: 100vh;
+  position: relative;
+}
+
+.gallery-body img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* --- NAVIGATION --- */
+body.gallery-page nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 65px;
+  padding: 0 2em;
+  display: flex;
+  align-items: center;
+  z-index: 2;
+  background: var(--nav-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+
+  /* Production blur fixes */
+  isolation: isolate;
+  transform-style: flat !important;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+body.gallery-page nav .nav-item {
+  flex: 1;
+}
+
+body.gallery-page nav .nav-item p {
+  color: var(--nav-text);
+  text-decoration: none;
+  margin: 0 20px;
+  font-size: 15px;
+  font-weight: 700;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  text-transform: none;
+  padding: 1em 0.25em;
+  transition: opacity 0.2s ease;
+}
+
+body.gallery-page nav .nav-item p::before,
+body.gallery-page nav .nav-item p::after {
+  position: absolute;
+  align-items: center;
+  opacity: 0;
+  color: var(--accent);
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease;
+}
+
+body.gallery-page nav .nav-item p::before { content: "["; left: -12px; transform: translateX(-10px); }
+body.gallery-page nav .nav-item p::after  { content: "]"; right: -12px; transform: translateX(10px); }
+
+body.gallery-page nav .nav-item p:hover::before,
+body.gallery-page nav .nav-item p:hover::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Active nav item: underline instead of brackets */
+body.gallery-page nav .nav-item p.active {
+  opacity: 1;
+  margin-top: 2px;
+  border-bottom: 2px solid var(--accent);
+}
+
+body.gallery-page nav .nav-item p.active::before,
+body.gallery-page nav .nav-item p.active::after,
+body.gallery-page nav .nav-item p.active:hover::before,
+body.gallery-page nav .nav-item p.active:hover::after {
+  content: "" !important;
+  opacity: 0 !important;
+  display: none !important;
+}
+
+/* --- SYSTEM INTERFACES --- */
+.gallery-body .img-previews {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;   /* centers without translateX(-50%), which lands on half-pixels and blurs */
+  width: 30%;
+  opacity: 0;
+}
+
+.gallery-body .img-previews img {
+  width: 600px;
+  height: 700px;
+  padding: 1em 0;
+  margin-bottom: 4em;
+}
+
+body.gallery-page.gallery-can-scroll .img-previews {
+  visibility: visible;
+  position: relative;
+}
+
+.gallery-body .gallery-container {
+  width: 100%;
+  padding-top: 4em;
+  background: transparent; /* lets the fixed gradient canvas show through */
+}
+
+/* --- LAYOUT MATRIXES --- */
+.gallery-body .gallery.layout-1-gallery { position: absolute; width: 100%; height: 100%; transform: translateX(0%); margin-top: 20px; }
+.gallery-body .gallery.layout-1-gallery .img { position: absolute; width: 100px; aspect-ratio: 8.5 / 11; }
+
+.gallery-body .gallery.layout-2-gallery { padding-top: 0.5em; position: fixed; top: 50%; left: 10%; transform: translateX(0%); }
+.gallery-body .gallery.layout-2-gallery .img { width: 75px; height: 100px; margin-bottom: 1em; }
+
+.gallery-body .gallery.layout-3-gallery { position: relative; width: 100%; height: 100%; transform: translateX(0%); margin-right: 10%; margin-top: 2em; }
+.gallery-body .gallery.layout-3-gallery .img { position: absolute; right: 4em; width: 300px; height: 400px; }
+
+/* --- THUMBNAIL CROPPING ---
+   Every thumbnail fills its frame (cropped, never stretched or letterboxed).
+   The large .img-previews in Detailed view stay uncropped (contain). */
+.gallery-body .gallery .img {
+  overflow: hidden;
+}
+
+.gallery-body .gallery .img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top; /* keeps headlines/faces in frame */
+  display: block;
+}
+
+/* --- LAYOUT 1 PIN PLACEMENTS ---
+   Snap-to-grid: 7 columns (0â€“6) spread edge to edge, 4 rows (0â€“3).
+   Every thumb in the same column lines up exactly. */
+.gallery-body .layout-1-gallery .img {
+  --thumb-w: 100px;
+  left: calc(2em + (100% - 4em - var(--thumb-w)) * var(--col, 0) / 6);
+  top: calc(var(--row, 0) * 22.5%);
+}
+
+/* Row 0 */
+.gallery-body .layout-1-gallery #img1  { --row: 0; --col: 0; }
+.gallery-body .layout-1-gallery #img2  { --row: 0; --col: 1; }
+.gallery-body .layout-1-gallery #img3  { --row: 0; --col: 3; }
+.gallery-body .layout-1-gallery #img4  { --row: 0; --col: 4; }
+
+/* Row 1 */
+.gallery-body .layout-1-gallery #img5  { --row: 1; --col: 0; }
+.gallery-body .layout-1-gallery #img6  { --row: 1; --col: 2; }
+.gallery-body .layout-1-gallery #img7  { --row: 1; --col: 5; }
+.gallery-body .layout-1-gallery #img8  { --row: 1; --col: 6; }
+
+/* Row 2 */
+.gallery-body .layout-1-gallery #img9  { --row: 2; --col: 0; }
+.gallery-body .layout-1-gallery #img10 { --row: 2; --col: 4; }
+.gallery-body .layout-1-gallery #img13 { --row: 2; --col: 2; }  /* 13+ slide galleries */
+
+/* Row 3 */
+.gallery-body .layout-1-gallery #img11 { --row: 3; --col: 0; }
+.gallery-body .layout-1-gallery #img12 { --row: 3; --col: 4; }
+.gallery-body .layout-1-gallery #img14 { --row: 3; --col: 3; }  /* 14+ slide galleries */
+
+.gallery-body .minimap {
+  position: fixed;
+  top: 51%;
+  left: 12.5%;
+  transform: translateX(-50%);
+  width: 140px;
+  height: 90px;
+  border: 1px solid var(--accent);
+  border-radius: 2px;
+  z-index: 2;
+  visibility: hidden;
+  opacity: 0;
+}
+
+/* --- ARTICLE TEXT --- */
+.gallery-body .layout-3-text {
+  position: fixed;
+  left: 4em;
+  top: var(--text-top);
+  transform: translateY(-50%);
+  max-height: 70vh;
+  overflow-y: auto;
+  width: 60%;
+  color: var(--heading);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  text-align: left;
+  z-index: 3;
+}
+
+.gallery-body .layout-3-text h1 {
+  font-size: 56px;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  margin-bottom: 0.35em;
+  color: var(--heading);
+}
+
+.gallery-body .layout-3-text p {
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--body-text);
+  padding-bottom: 1.2em;
+}
+
+/* --- BACKGROUND CANVAS --- */
+.gradient-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -10;
+  pointer-events: none;
+}

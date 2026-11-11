@@ -6,7 +6,7 @@ function Navbar() {
   const [openLinks, setOpenLinks] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
-  const isHidden = location.pathname === '/projects/ephemeral' || location.pathname === '/projects/colby' || location.pathname === '/projects/club-hockey' || location.pathname === '/projects/dragons';
+  const isHidden = location.pathname === '/projects/ephemeral' || location.pathname === '/projects/colby' || location.pathname === '/projects/club-hockey' || location.pathname === '/projects/dragons' || location.pathname === '/projects/freelance';
 
   const toggleNavbar = () => {
     setOpenLinks(!openLinks);
